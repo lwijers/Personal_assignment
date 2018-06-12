@@ -26,6 +26,9 @@ export default class Evaluation extends BaseEntity {
   remark: string
 
 }
+
+
+
   // @IsString()
   // @MinLength(8)
   // @Column('text')

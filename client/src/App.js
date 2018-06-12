@@ -8,6 +8,8 @@ import LogoutPage from './components/logout/LogoutPage'
 import './App.css'
 import TopBar from './components/layout/TopBar'
 import DisplayStudent from './components/students/DisplayStudent'
+import DisplayBatch from './components/batches/DisplayBatch'
+
 
 class App extends Component {
   render() {
@@ -18,7 +20,7 @@ class App extends Component {
             <TopBar />
           </nav>
           <main style={{marginTop:75}}>
-            <Route exact path="/" component={DisplayStudent} />
+            <Route exact path="/" component={DisplayBatch} />
            
           </main>
         </div>

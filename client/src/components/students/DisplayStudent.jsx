@@ -10,16 +10,28 @@ import Typography from 'material-ui/Typography'
 
 
 class DisplayStudent extends PureComponent {
+  componentWillMount() {
+    if (this.props.authenticated) {
+      if (this.props.games === null) this.props.getGames()
+      if (this.props.users === null) this.props.getUsers()
+    }
+  }
 
 
   render() {
+
     console.log(this.props)
     return (
     
       <Paper className="outer-paper">
-        asdafadf
+        {String(this.props.authenticated)}
       </Paper>)
   }
 }
 
-export default DisplayStudent
+const mapStateToProps = state => ({
+  authenticated: state.currentUser !== null
+})
+
+
+export default connect(mapStateToProps)(DisplayStudent)
