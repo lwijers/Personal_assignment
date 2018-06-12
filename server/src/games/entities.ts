@@ -48,7 +48,7 @@ export class Player extends BaseEntity {
   game: Game
 
   @Column()
-  userId: number
+  userID: number
 
   @Column('char', {length: 1})
   symbol: Symbol

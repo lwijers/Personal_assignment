@@ -1,39 +1,45 @@
-import { JsonController, Post, Param, Get, Body, Authorized } from 'routing-controllers'
-import User from './entity';
-import { io } from '../index'
+import { JsonController, Post, Put, Param, Get, Body, HttpCode, NotFoundError } from 'routing-controllers'
+import Student from './entity';
 
 @JsonController()
-export default class UserController {
+export default class StudentController {
 
-  @Post('/users')
-  async signup(
-    @Body() data: User
-  ) {
-    const {password, ...rest} = data
-    const entity = User.create(rest)
-    await entity.setPassword(password)
+    @Post('/students')
+@HttpCode(201)
+createStudent(
+  @Body() student: Student
+) {
+  return student.save()
+}
 
-    const user = await entity.save()
+@Put('/students/:id')
+async updatePage(
+  @Param('id') id: number,
+  @Body() update: Partial<Student>
+) {
+  const student = await Student.findOneById(id)
+  if (!student) throw new NotFoundError('Cannot find student')
 
-    io.emit('action', {
-      type: 'ADD_USER',
-      payload: entity
-    })
+  return Student.merge(student, update).save()
+}
 
-    return user
-  }
-
-  @Authorized()
-  @Get('/users/:id([0-9]+)')
-  getUser(
+@Get('/students/:id([0-9]+)')
+  getStudents(
     @Param('id') id: number
   ) {
-    return User.findOneById(id)
+    return Student.findOneById(id)
   }
 
-  @Authorized()
-  @Get('/users')
-  allUsers() {
-    return User.find()
+  @Get('/students')
+  async allStudents() {
+    const students = await Student.find()
+    return { students }
   }
+
+// @Delete('/students/:id([0-9]+)')
+// async deleteStudent(
+//   @Param('id') id: number
+//   ) {
+//     return Student.delete(id)
+//   }
 }

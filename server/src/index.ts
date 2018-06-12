@@ -11,6 +11,9 @@ import {Server} from 'http'
 import * as IO from 'socket.io'
 import * as socketIoJwtAuth from 'socketio-jwt-auth'
 import {secret} from './jwt'
+import StudentController from './students/controller'
+import EvaluationController from './evaluations/controller'
+import BatchController from './batches/controller'
 
 const app = new Koa()
 const server = new Server(app.callback())
@@ -20,6 +23,9 @@ const port = process.env.PORT || 4000
 useKoaServer(app, {
   cors: true,
   controllers: [
+    BatchController,
+    EvaluationController,
+    StudentController,
     UserController,
     LoginController,
     GameController

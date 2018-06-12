@@ -1,30 +1,27 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
-import { Exclude } from 'class-transformer';
-import { MinLength, IsString, IsEmail, IsNumber } from 'class-validator';
+import { MinLength, IsString} from 'class-validator';
 
 
 @Entity()
-export default class Student extends BaseEntity {
+export default class Batch extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   id?: number
+
+  @IsString()
+  @Column('text')
+  batchNumber: string
+
  
-  @Column('integer')
-  batchID: number
-  
-  @IsString()
-  @MinLength(2)
-  @Column('text')
-  firstName: string
+  @Column('json')
+  students: string[]
 
-  @IsString()
-  @MinLength(2)
-  @Column('text')
-  lastName: string
 
-  @IsEmail()
-  @Column('text')
-  email: string
+
+
+  // @IsEmail()
+  // @Column('text')
+  // email: string
 
   // @IsString()
   // @MinLength(8)

@@ -1,31 +1,31 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn } from 'typeorm'
 import { Exclude } from 'class-transformer';
 import { MinLength, IsString, IsEmail, IsNumber } from 'class-validator';
+import {Type} from "class-transformer";
 
 
 @Entity()
-export default class Student extends BaseEntity {
+export default class Evaluation extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   id?: number
- 
+
   @Column('integer')
-  batchID: number
+  studentID: number
+
+  @Type(() => Date)
+  @Column('text')
+  date: Date
   
   @IsString()
-  @MinLength(2)
   @Column('text')
-  firstName: string
+  color: string
 
   @IsString()
-  @MinLength(2)
   @Column('text')
-  lastName: string
+  remark: string
 
-  @IsEmail()
-  @Column('text')
-  email: string
-
+}
   // @IsString()
   // @MinLength(8)
   // @Column('text')
@@ -37,4 +37,7 @@ export default class Student extends BaseEntity {
   // http://typeorm.io/#/many-to-one-one-to-many-relations
 //   @OneToMany(_ => Player, player => player.user) 
 //   players: Player[]
-}
+
+
+
+// studentId=1 color='red' remark='blablabla'
