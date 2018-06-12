@@ -36,10 +36,4 @@ async updatePage(
     return { batches }
   }
 
-// @Delete('/students/:id([0-9]+)')
-// async deleteStudent(
-//   @Param('id') id: number
-//   ) {
-//     return Student.delete(id)
-//   }
 }
