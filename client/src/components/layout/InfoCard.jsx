@@ -21,22 +21,19 @@ class InfoCard extends PureComponent {
     return (
     
       <Card className="info-card" >
-        <CardContent>
-        <Typography color="textSecondary" component="h2">
-          Batch:&nbsp;{batch.id}
+        <Typography variant="headline" component="h2">
+          <h2>Batch:&nbsp;{batch.id}</h2>
         </Typography>
-        <Typography component="p">
-          start date:
-          end date:
+        <Typography>
+          start date: {batch.startDate}
+          end date: {batch.endDate}
         </Typography>
-      </CardContent>
-      <CardActions>
-    
-      </CardActions>
     </Card>
     )
   }
 } 
+
+
 const mapStateToProps = state => ({
   authenticated: state.currentUser !== null
 })

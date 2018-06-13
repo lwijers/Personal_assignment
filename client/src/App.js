@@ -9,7 +9,11 @@ import './App.css'
 import TopBar from './components/layout/TopBar'
 import DisplayStudent from './components/students/DisplayStudent'
 import DisplayBatch from './components/batches/DisplayBatch'
-
+import BatchOverview from './components/batches/BatchOverview'
+import AddBatch from './components/batches/AddBatch'
+import AddStudent from './components/students/AddStudent'
+import DisplayEvaluation from './components/evaluations/DisplayEvaluation'
+import AddEvaluation from './components/evaluations/AddEvaluation'
 
 class App extends Component {
   render() {
@@ -20,7 +24,7 @@ class App extends Component {
             <TopBar />
           </nav>
           <main style={{marginTop:75}}>
-            <Route exact path="/" component={DisplayBatch} />
+            <Route exact path="/" component={AddEvaluation} />
            
           </main>
         </div>

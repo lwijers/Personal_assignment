@@ -7,31 +7,44 @@ import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-
-
+import {giveSingleStudent} from '../../actions/students'
+import './student.css'
 class DisplayStudent extends PureComponent {
   componentWillMount() {
-    if (this.props.authenticated) {
-      if (this.props.games === null) this.props.getGames()
-      if (this.props.users === null) this.props.getUsers()
-    }
+    this.props.giveSingleStudent()
   }
 
-
   render() {
+    const {students} = this.props
 
-    console.log(this.props)
+    if (students === null) return null
+
     return (
     
-      <Paper className="outer-paper">
-        {String(this.props.authenticated)}
-      </Paper>)
+      <div>
+
+        <div className="outer-div">
+          <div className='image-container'>
+          {console.log(this.props)}
+          <img src={this.props.students.pictureURL} className="portrait-image"/> 
+          </div>
+          <div>
+            <p>Name: &nbsp;{students.firstName}&nbsp;{students.lastName}</p>
+            <p>email: &nbsp; {students.email}</p>
+            <p>ratings:</p>
+          </div>
+        </div>
+        <div>
+          <button>add review</button>
+        </div>
+      </div>
+    
+    )
   }
 }
 
-const mapStateToProps = state => ({
-  authenticated: state.currentUser !== null
-})
+const mapStateToProps = ({students}) => {
+  return {students}
+}
 
-
-export default connect(mapStateToProps)(DisplayStudent)
+export default connect(mapStateToProps,{giveSingleStudent})(DisplayStudent)

@@ -1,27 +1,27 @@
 import * as request from 'superagent'
 import {baseUrl} from '../constants'
 
-export const GIVE_BATCHES = 'GIVE_BATCHES'
-export const GIVE_BATCH = 'GIVE_BATCH'
+export const GIVE_STUDENTS = 'GIVE_STUDENTS'
+export const GIVE__ONE_STUDENT = 'GIVE__ONE_STUDENT'
 
-export const giveBatches = () => dispatch => {
+export const giveStudents = () => dispatch => {
+    
     request
-    .get(`${baseUrl}/batches`)
+    .get(`${baseUrl}/students`)
     .then(response => {
         dispatch({
-            type: GIVE_BATCHES,
+            type: GIVE_STUDENTS,
             payload: response.body
         })
     })
     .catch(err => console.error(err))
 }
 
-export const giveSingleBatch = () => dispatch => {
-    request
-    .get(`${baseUrl}/batches/1`)
+export const giveSingleStudent = () => dispatch => {
+    request.get(`${baseUrl}/students/12`)
     .then(response => {
         dispatch({
-            type: GIVE_BATCH,
+            type: GIVE__ONE_STUDENT,
             payload: response.body
         })
     })
