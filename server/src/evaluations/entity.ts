@@ -1,6 +1,5 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn } from 'typeorm'
-import { Exclude } from 'class-transformer';
-import { MinLength, IsString, IsEmail, IsNumber } from 'class-validator';
+import {IsString, IsNumber } from 'class-validator';
 import {Type} from "class-transformer";
 
 
@@ -10,16 +9,13 @@ export default class Evaluation extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number
 
-  @Column('integer')
-  studentID: number
-
   @Type(() => Date)
   @Column('text')
   date: Date
-  
-  @IsString()
-  @Column('text')
-  color: string
+
+  @IsNumber()
+  @Column('integer')
+  score: number
 
   @IsString()
   @Column('text')

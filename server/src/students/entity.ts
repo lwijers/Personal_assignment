@@ -8,10 +8,11 @@ export default class Student extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   id?: number
- 
-  @Column('integer')
-  batchID: number
-  
+
+  @IsString()
+  @Column('text')
+  pictureURL: string
+
   @IsString()
   @MinLength(2)
   @Column('text')
@@ -25,6 +26,11 @@ export default class Student extends BaseEntity {
   @IsEmail()
   @Column('text')
   email: string
+
+
+
+  // http POST  :4000/students pictureURL="https://d3iw72m71ie81c.cloudfront.net/male-57.jpg" firstName="Test2 " lastName="test2" email="test2@test2.test"
+// 
 
   // @IsString()
   // @MinLength(8)
