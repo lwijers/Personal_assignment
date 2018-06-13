@@ -9,7 +9,6 @@ import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import InfoCard from '../layout/InfoCard'
-import './DisplayBatch.css'
 
 class AddBatch extends PureComponent {
     constructor(props) {
@@ -22,7 +21,6 @@ class AddBatch extends PureComponent {
 
 
       handleCreateBatch(e) {
-        console.log('afdf')
         this.setState(() => ({
             toBatch: true
         }))
@@ -37,7 +35,7 @@ class AddBatch extends PureComponent {
 
   render() {
     if (this.state.toBatch === true) {
-        return <Redirect to='/displayBatch' />
+        return <Redirect to='/studentOverview' />
       } else if (this.state.toBatches === true) {
         return <Redirect to='/' />
       }
@@ -70,24 +68,3 @@ class AddBatch extends PureComponent {
 } 
 
 export default AddBatch
-
-// constructor(props) {
-//     super(props);
-//     this.state = {
-//       toCreateBatch: false,
-//     };
-//   }
-
-
-//   handleClick(e) {
-//     console.log('afdf')
-//     this.setState(() => ({
-//       toCreateBatch: true
-//     }))
-//   }
-
-// if (this.state.toCreateBatch === true) {
-//     return <Redirect to='/createBatch' />
-//   }
-
-//   <button onClick={this.handleClick.bind(this)}>

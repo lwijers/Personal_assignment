@@ -9,7 +9,6 @@ import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import InfoCard from '../layout/InfoCard'
-import './DisplayBatch.css'
 
 class BatchOverview extends PureComponent {
   constructor(props) {
@@ -23,6 +22,7 @@ class BatchOverview extends PureComponent {
     this.props.giveBatches()
   }
 
+
   handleClick(e) {
     console.log('afdf')
     this.setState(() => ({
@@ -31,11 +31,16 @@ class BatchOverview extends PureComponent {
   }
 
   render() {
+    const {batches, authenticated} = this.props
+
+    if (!authenticated) return (
+			<Redirect to="/login" />
+		)
     if (this.state.toCreateBatch === true) {
       return <Redirect to='/createBatch' />
     }
+    
 
-    const {batches} = this.props
     
     if (batches === null) return null
 
@@ -58,9 +63,10 @@ class BatchOverview extends PureComponent {
 } 
 
 
-const mapStateToProps = ({batches}) => {
-  return {batches}
-}
+const mapStateToProps = state => ({
+ batches: state.batches,
+ authenticated: state.currentUser!== null
+})
 
 
 export default connect(mapStateToProps, {giveBatches})(BatchOverview)

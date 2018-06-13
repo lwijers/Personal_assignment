@@ -8,7 +8,8 @@ import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import {giveSingleStudent} from '../../actions/students'
-import './student.css'
+import './styling/student.css'
+
 class DisplayStudent extends PureComponent {
   componentWillMount() {
     this.props.giveSingleStudent()
