@@ -3,7 +3,7 @@ import {getGames, createGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {giveBatches} from '../../actions/batches'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
@@ -12,13 +12,28 @@ import InfoCard from '../layout/InfoCard'
 import './DisplayBatch.css'
 
 class BatchOverview extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toCreateBatch: false,
+    };
+  }
+  
   componentWillMount() {
     this.props.giveBatches()
   }
 
-
+  handleClick(e) {
+    console.log('afdf')
+    this.setState(() => ({
+      toCreateBatch: true
+    }))
+  }
 
   render() {
+    if (this.state.toCreateBatch === true) {
+      return <Redirect to='/createBatch' />
+    }
 
     const {batches} = this.props
     
@@ -35,7 +50,7 @@ class BatchOverview extends PureComponent {
         })
         }
       </div>
-        <button>Create Batch</button>         
+        <button onClick={this.handleClick.bind(this)}>Create Batch </button>         
       </div>
         
     )

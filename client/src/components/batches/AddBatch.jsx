@@ -11,10 +11,37 @@ import Typography from 'material-ui/Typography'
 import InfoCard from '../layout/InfoCard'
 import './DisplayBatch.css'
 
-class BatchOverview extends PureComponent {
+class AddBatch extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+          toBatch: false,
+          toBatches:false,
+        };
+      }
 
+
+      handleCreateBatch(e) {
+        console.log('afdf')
+        this.setState(() => ({
+            toBatch: true
+        }))
+      }
+
+
+      handleBack(e) {
+        this.setState(() => ({
+            toBatches: true
+        }))
+      }
 
   render() {
+    if (this.state.toBatch === true) {
+        return <Redirect to='/displayBatch' />
+      } else if (this.state.toBatches === true) {
+        return <Redirect to='/' />
+      }
+
 
     return (  
         <div> 
@@ -33,12 +60,34 @@ class BatchOverview extends PureComponent {
                     </div>
                 </form>
             </div>
-            <button>Create Batch</button>  
-            <button>add Student</button>
+            <button onClick={this.handleCreateBatch.bind(this)}>Create Batch</button>  
+
+            <button onClick={this.handleBack.bind(this)}>back</button>
         </div>
         
     )
   }
 } 
 
-export default BatchOverview
+export default AddBatch
+
+// constructor(props) {
+//     super(props);
+//     this.state = {
+//       toCreateBatch: false,
+//     };
+//   }
+
+
+//   handleClick(e) {
+//     console.log('afdf')
+//     this.setState(() => ({
+//       toCreateBatch: true
+//     }))
+//   }
+
+// if (this.state.toCreateBatch === true) {
+//     return <Redirect to='/createBatch' />
+//   }
+
+//   <button onClick={this.handleClick.bind(this)}>

@@ -27,14 +27,31 @@ class DisplayBatch extends PureComponent {
     
     return (   
       <div className="outer-paper">
-      <Typography variant="headline" component="h2">
-          adgfd
-      </Typography>
-        {students.map((batch) => {
-          return <InfoCard batch={batch}/>
-        })
-        } 
-      </div>)
+        <div>
+          <h1>Members of Batch</h1>
+        </div>
+        <div>
+          {students.map((batch) => {
+            return <InfoCard batch={batch}/>
+          })
+          } 
+        </div>
+      
+        <div>
+
+        </div>
+      
+        <div>
+        </div>
+      
+        <div>
+        </div>
+      
+      
+      
+      </div>
+      
+    )
   }
 } 
 
@@ -45,3 +62,23 @@ const mapStateToProps = ({students}) => {
 
 
 export default connect(mapStateToProps, {giveStudents})(DisplayBatch)
+// constructor(props) {
+//     super(props);
+//     this.state = {
+//       toCreateBatch: false,
+//     };
+//   }
+
+
+//   handleClick(e) {
+//     console.log('afdf')
+//     this.setState(() => ({
+//       toCreateBatch: true
+//     }))
+//   }
+
+// if (this.state.toCreateBatch === true) {
+//     return <Redirect to='/createBatch' />
+//   }
+
+//   

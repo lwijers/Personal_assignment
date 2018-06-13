@@ -24,8 +24,13 @@ class App extends Component {
             <TopBar />
           </nav>
           <main style={{marginTop:75}}>
-            <Route exact path="/" component={AddEvaluation} />
-           
+            <Route exact path="/" component={BatchOverview} />
+            <Route exact path="/createBatch" component={AddBatch} />
+            <Route exact path="/addStudent" component={AddStudent} />
+            <Route exact path="/displayStudent" component={DisplayStudent} />
+            <Route exact path="/displayBatch" component={DisplayBatch} />
+            <Route exact path="/displayEvaluation" component={DisplayEvaluation} />
+            <Route exact path="/addEvaluation" component={AddEvaluation} />
           </main>
         </div>
       </Router>
