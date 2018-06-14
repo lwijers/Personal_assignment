@@ -17,7 +17,7 @@ async updatePage(
   @Param('id') id: number,
   @Body() update: Partial<Evaluation>
 ) {
-  const evaluation = await Evaluation.findOneById(id)
+  const evaluation = await Evaluation.findOne(id)
   if (!evaluation) throw new NotFoundError('Cannot find student')
 
   return Evaluation.merge(evaluation, update).save()
@@ -27,7 +27,7 @@ async updatePage(
   getEvaluations(
     @Param('id') id: number
   ) {
-    return Evaluation.findOneById(id)
+    return Evaluation.findOne(id)
   }
 
   @Get('/evaluations')

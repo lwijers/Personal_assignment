@@ -16,6 +16,7 @@ class StudentOverview extends PureComponent {
     super(props);
     this.state = {
       toCreateStudent: false,
+      toBatches: false
     };
   }
 
@@ -30,27 +31,19 @@ class StudentOverview extends PureComponent {
     }))
   }
 
-
-  renderStudent() {
-    const {students} = this.props
-    return (
-      <div>
-        <StudentCard student={this.props.students[0]}/>
-                    
-        <div>
-            <button onClick={this.handleAddStudent.bind(this)} >add student</button>
-        </div>
-      </div>
-    )
+  handleBack(e) {
+    this.setState(() => ({
+      toBatches: true
+    }))
   }
-
-
 
   render() {
 
     if (this.state.toAddStudent === true) {
       return <Redirect to='/addStudent' />
-  }
+    } else if (this.state.toBatches === true) {
+      return <Redirect to='/batchoverview' />
+    }
 
     const {students} = this.props
     
@@ -58,17 +51,26 @@ class StudentOverview extends PureComponent {
 
 
 
-    
+    console.log(students)
     return (   
       <div className="outer-paper">
         <div>
           <h1>Student Overview</h1>
-          <h2>Batch:</h2>
+          <h2>Batch: </h2>
         </div>
         <div>
-          {this.renderStudent()}
+          {students.map((student) => {
+            return(
+              <StudentCard student={student}/>
+            )
+          })}
         </div>
-      
+        <div>
+            <button onClick={this.handleAddStudent.bind(this)} >add student</button>
+        </div>
+        <div>
+            <button onClick={this.handleBack.bind(this)} >back</button>
+        </div>
       </div>
       
     )

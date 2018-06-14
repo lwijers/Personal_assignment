@@ -27,3 +27,10 @@ export const giveSingleStudent = () => dispatch => {
     })
     .catch(err => console.error(err))
 }
+
+export const addStudent = (student) => (dispatch) => {
+    request
+      .post(`${baseUrl}/students`)
+      .send(student)
+      .catch(err => console.error(err))
+  }

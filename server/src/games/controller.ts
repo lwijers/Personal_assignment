@@ -33,7 +33,7 @@ export default class GameController {
       symbol: 'x'
     }).save()
 
-    const game = await Game.findOneById(entity.id)
+    const game = await Game.findOne(entity.id)
 
     io.emit('action', {
       type: 'ADD_GAME',
@@ -50,7 +50,7 @@ export default class GameController {
     @CurrentUser() user: User,
     @Param('id') gameId: number
   ) {
-    const game = await Game.findOneById(gameId)
+    const game = await Game.findOne(gameId)
     if (!game) throw new BadRequestError(`Game does not exist`)
     if (game.status !== 'pending') throw new BadRequestError(`Game is already started`)
 
@@ -65,7 +65,7 @@ export default class GameController {
 
     io.emit('action', {
       type: 'UPDATE_GAME',
-      payload: await Game.findOneById(game.id)
+      payload: await Game.findOne(game.id)
     })
 
     return player
@@ -81,7 +81,7 @@ export default class GameController {
     @Param('id') gameId: number,
     @Body() update: GameUpdate
   ) {
-    const game = await Game.findOneById(gameId)
+    const game = await Game.findOne(gameId)
     if (!game) throw new NotFoundError(`Game does not exist`)
 
     const player = await Player.findOne({ user, game })
@@ -120,7 +120,7 @@ export default class GameController {
   getGame(
     @Param('id') id: number
   ) {
-    return Game.findOneById(id)
+    return Game.findOne(id)
   }
 
   @Authorized()

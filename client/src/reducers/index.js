@@ -6,8 +6,11 @@ import signup from './signup'
 import batches from './batches'
 import students from './batch'
 import evaluation from './evaluations'
+import currentBatch from './currentBatch'
+
 
 export default {
+  currentBatch,
   evaluation,
   students,
   batches,

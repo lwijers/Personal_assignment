@@ -8,7 +8,7 @@ import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import InfoCard from '../layout/InfoCard'
+
 
 
 class AddEvaluation extends PureComponent {

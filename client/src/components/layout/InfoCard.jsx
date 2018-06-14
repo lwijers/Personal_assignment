@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {getGames, createGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
-import {giveBatches} from '../../actions/batches'
+import {setCurrentBatch} from '../../actions/batches'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Button from 'material-ui/Button'
@@ -10,17 +10,38 @@ import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import './InfoCard.css'
 
+
 class InfoCard extends PureComponent {
-//   componentWillMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toBatch: false,
+    };
+  }
 
-//   }
 
+
+  handleCardClick(e) {
+    this.props.setCurrentBatch(this.props.batch)
+    this.setState(() => ({
+      toBatch: true
+    }))
+  }
+
+  
   render() {
+    if (this.state.toBatch === true) {
+      return <Redirect to='/studentOverview' />
+    }
+    
     const {batch} = this.props
 
     return (
     
-      <Card className="info-card" >
+      <Card 
+      className="info-card"
+      onClick={this.handleCardClick.bind(this)}
+      >
         <Typography variant="headline" component="h2">
           <h2>Batch:&nbsp;{batch.id}</h2>
         </Typography>
@@ -39,4 +60,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default InfoCard
+export default connect(null, {setCurrentBatch})(InfoCard)

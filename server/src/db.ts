@@ -3,7 +3,7 @@ import { DefaultNamingStrategy } from 'typeorm/naming-strategy/DefaultNamingStra
 import { NamingStrategyInterface } from 'typeorm/naming-strategy/NamingStrategyInterface'
 import { snakeCase } from 'typeorm/util/StringUtils'
 import User from './users/entity'
-import { Player, Game } from './games/entities'
+import { Game } from './games/entities'
 import Student from './students/entity'
 import Evaluation from './evaluations/entity'
 import Batch from './batches/entity'
@@ -36,7 +36,7 @@ export default () =>
       Evaluation,
       Student,
       User,
-      Player,
+      // Player,
       Game
     ],
     synchronize: true, // careful with this in production!

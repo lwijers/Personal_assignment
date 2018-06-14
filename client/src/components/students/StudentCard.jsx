@@ -25,19 +25,15 @@ class StudentCard extends PureComponent {
             <div className="card-container">
                 
                 <div className='image-container'>
-                <img src={student.pictureURL} className="portrait-image"/> 
+                    <div className="inner-image">
+                        <img src={student.pictureURL} className="portrait-image"/> 
+                    </div>
+                    <div className="cardFooter">
+                        <p className="name">{student.firstName}</p>
+                    </div>
                 </div>
-                
-                <div>
-                <p>Name: &nbsp;{student.firstName}&nbsp;{student.lastName}</p>
-                 <p>ratings:</p>
-                </div>          
-            
             </div>
-
         </div>
-        
-    
     )
   }
 }
