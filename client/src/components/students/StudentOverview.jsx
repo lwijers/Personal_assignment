@@ -22,7 +22,7 @@ class StudentOverview extends PureComponent {
 
 
   componentWillMount() {
-    console.log(this.props)
+
     this.props.giveStudents(this.props.currentBatch.id)
   }
 

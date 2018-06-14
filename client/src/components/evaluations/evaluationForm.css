@@ -1,0 +1,48 @@
+.scoreBoxesContainer {
+    display: flex;
+    height: 50px;
+}
+
+.scoreBox {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.scoreBoxSelected {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    margin: 10px;
+    border: 3px solid blue;
+}
+
+.scoreBoxContainer {
+    width: 40px;
+    align-content: center;
+
+}
+
+
+
+.scoreBox:hover {
+    border: 3px solid blue;
+}
+.redBox  {
+    border: 1px solid red;
+}
+
+#red {
+    background-color: red
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#green {
+    background-color: green;
+}
+
+

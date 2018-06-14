@@ -13,14 +13,21 @@ class DisplayStudent extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      toBatch: false,
+      toAddEvaluation: false,
     };
   }
 
+  handleAddEvaluation(e) {
+    this.setState(() => ({
+      toAddEvaluation: true
+    }))
+  }
+
+
 
   render() {
-    if (this.state.toBatch === true) {
-      return <Redirect to='/studentOverview' />
+    if (this.state.toAddEvaluation === true) {
+      return <Redirect to='/addEvaluation' />
     }
 
     const {currentStudent} = this.props
@@ -28,7 +35,7 @@ class DisplayStudent extends PureComponent {
     return (
     
       <div>
-
+        <h1>Student Details</h1>
         <div className="outer-div">
           <div className='image'>
           <img src={currentStudent.pictureURL} className="portrait-image"/> 
@@ -40,7 +47,8 @@ class DisplayStudent extends PureComponent {
           </div>
         </div>
         <div>
-          <button>add review</button>
+          <button
+          onClick={this.handleAddEvaluation.bind(this)}>add evaluation</button>
           <button>edit student</button>
           <button>delete student</button>
         </div>
