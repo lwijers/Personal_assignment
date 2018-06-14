@@ -1,12 +1,7 @@
 import React, {PureComponent} from 'react'
-import {getGames, createGame} from '../../actions/games'
-import {getUsers} from '../../actions/users'
 import {giveBatches} from '../../actions/batches'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
-import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import InfoCard from '../layout/InfoCard'
 
@@ -24,7 +19,6 @@ class BatchOverview extends PureComponent {
 
 
   handleClick(e) {
-    console.log('afdf')
     this.setState(() => ({
       toCreateBatch: true
     }))

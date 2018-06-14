@@ -33,7 +33,6 @@ class StudentOverview extends PureComponent {
 
   renderStudent() {
     const {students} = this.props
-    console.log(this.props)
     return (
       <div>
         <StudentCard student={this.props.students[0]}/>

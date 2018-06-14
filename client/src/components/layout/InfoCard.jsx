@@ -17,7 +17,7 @@ class InfoCard extends PureComponent {
 
   render() {
     const {batch} = this.props
-    console.log(batch, 'lenn22222')
+
     return (
     
       <Card className="info-card" >

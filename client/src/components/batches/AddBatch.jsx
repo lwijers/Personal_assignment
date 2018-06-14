@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {getGames, createGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
-import {giveBatches} from '../../actions/batches'
+import {giveBatches, createBatch} from '../../actions/batches'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Button from 'material-ui/Button'
@@ -16,31 +16,64 @@ class AddBatch extends PureComponent {
         this.state = {
           toBatch: false,
           toBatches:false,
+          batchNumber: 0,
+          startDate: new Date().toISOString().slice(0,10),
+          endDate: ""       
         };
-      }
+    }
 
-
-      handleCreateBatch(e) {
+    handleCreateBatch(e) {
+        this.props.createBatch({
+            batchNumber: this.state.batchNumber,
+            startDate: this.state.startDate, 
+            endDate: this.state.endDate
+        })
         this.setState(() => ({
             toBatch: true
         }))
-      }
+    }
+
+    handleChange(e) {
+        const i = e.target.value
+        
+        switch (e.target.id) {
+        
+            case "start-date":
+                this.setState(() => ({
+                startDate: i
+                }))
+    
+            case "end-date":
+                this.setState(() => ({
+                endDate: i
+                }))               
+
+            default:
+                break;
+        }
+    }
+
+    handleNumberChange(e) {
+        const i = Number(e.target.value)
+        this.setState(() => ({
+            batchNumber: i
+        }))
+    }  
 
 
-      handleBack(e) {
+    handleBack(e) {
         this.setState(() => ({
             toBatches: true
         }))
-      }
+    }
 
-  render() {
-    if (this.state.toBatch === true) {
-        return <Redirect to='/studentOverview' />
-      } else if (this.state.toBatches === true) {
-        return <Redirect to='/' />
-      }
-
-
+    render() {
+        if (this.state.toBatch === true) {
+            return <Redirect to='/studentOverview' />
+        } else if (this.state.toBatches === true) {
+            return <Redirect to='/' />
+        }
+    
     return (  
         <div> 
             <div>
@@ -49,22 +82,37 @@ class AddBatch extends PureComponent {
             <div>
                 <form>
                     <div>
+                        batch number:
+                        <input 
+                        type="number"
+                        id="batchNumber" 
+
+                        onChange={this.handleNumberChange.bind(this)}/>
+                    </div>
+                    <div>
                         start date:
-                        <input type ="date" id="start-date"/>
+                        <input
+                        type ="date"
+                        id="start-date"
+                        value={this.state.startDate} 
+                        onChange={this.handleChange.bind(this)}/>
                     </div>
                     <div>
                         end date:
-                        <input type ="date"id="end-date"/>
+                        <input 
+                        type ="date"
+                        id="end-date"
+                        value={this.state.endDate}
+                        onChange={this.handleChange.bind(this)}/>
                     </div>
                 </form>
             </div>
             <button onClick={this.handleCreateBatch.bind(this)}>Create Batch</button>  
 
             <button onClick={this.handleBack.bind(this)}>back</button>
-        </div>
-        
+        </div>       
     )
   }
 } 
 
-export default AddBatch
+export default connect(null, {createBatch})(AddBatch)

@@ -15,10 +15,11 @@ class StudentCard extends PureComponent {
   }
 
   render() {
+
     const {student} = this.props
 
     if (student === null) return null
-    console.log(this.props)
+    
     return ( 
         <div>
             <div className="card-container">
