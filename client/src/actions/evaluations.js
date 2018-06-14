@@ -16,3 +16,11 @@ export const giveEvaluation = () => dispatch => {
     })
     .catch(err => console.error(err))
 }
+
+export const addEvaluation = (evaluation) => dispatch => {
+    console.log(evaluation)
+    request
+    .post(`${baseUrl}/evaluations`)
+    .send(evaluation)
+    .catch(err => console.error(err)) 
+}
