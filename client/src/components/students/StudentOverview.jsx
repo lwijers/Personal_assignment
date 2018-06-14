@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react'
-import {getGames, createGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {giveStudents} from '../../actions/students'
 import {connect} from 'react-redux'

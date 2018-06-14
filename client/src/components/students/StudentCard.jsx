@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react'
-import {getGames, createGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'

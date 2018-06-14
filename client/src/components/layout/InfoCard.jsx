@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react'
-import {getGames, createGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {setCurrentBatch} from '../../actions/batches'
 import {connect} from 'react-redux'

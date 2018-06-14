@@ -1,4 +1,3 @@
-import games from './games'
 import users from './users'
 import login from './login'
 import currentUser from './currentUser'
@@ -14,7 +13,6 @@ export default {
   evaluation,
   students,
   batches,
-  games,
   users,
   login,
   currentUser,
