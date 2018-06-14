@@ -7,6 +7,8 @@ import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import {giveSingleStudent} from '../../actions/students'
+import {giveEvalByStud} from '../../actions/evaluations'
+
 import './styling/student.css'
 
 class DisplayStudent extends PureComponent {
@@ -14,8 +16,15 @@ class DisplayStudent extends PureComponent {
     super(props);
     this.state = {
       toAddEvaluation: false,
+      toBatch: false
     };
   }
+
+  componentWillMount() {
+    this.props.giveEvalByStud(this.props.currentStudent.id)
+    // console.log()
+  }
+
 
   handleAddEvaluation(e) {
     this.setState(() => ({
@@ -23,12 +32,19 @@ class DisplayStudent extends PureComponent {
     }))
   }
 
-
+  handleBackClick(e) {
+    this.setState(() => ({
+      toBatch: true
+    }))
+  }
 
   render() {
     if (this.state.toAddEvaluation === true) {
       return <Redirect to='/addEvaluation' />
+    } else if (this.state.toBatch === true) {
+      return <Redirect to='/studentOverview' />
     }
+
 
     const {currentStudent} = this.props
     
@@ -52,15 +68,17 @@ class DisplayStudent extends PureComponent {
           <button>edit student</button>
           <button>delete student</button>
         </div>
-        <button>back</button>
+        <button
+        onClick={this.handleBackClick.bind(this)}
+        >back</button>
       </div>
     
     )
   }
 }
 
-const mapStateToProps = ({currentStudent}) => {
-  return {currentStudent}
+const mapStateToProps = ({currentStudent, studentEvaluations}) => {
+  return {currentStudent, studentEvaluations}
 }
 
-export default connect(mapStateToProps,{giveSingleStudent})(DisplayStudent)
+export default connect(mapStateToProps,{giveSingleStudent, giveEvalByStud})(DisplayStudent)
