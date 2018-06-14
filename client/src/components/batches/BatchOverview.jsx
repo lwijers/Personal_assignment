@@ -1,26 +1,40 @@
 import React, {PureComponent} from 'react'
-import {getGames, createGame} from '../../actions/games'
-import {getUsers} from '../../actions/users'
 import {giveBatches} from '../../actions/batches'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
-import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
+import {Redirect, Link} from 'react-router-dom'
 import Typography from 'material-ui/Typography'
 import InfoCard from '../layout/InfoCard'
-import './DisplayBatch.css'
 
 class BatchOverview extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toCreateBatch: false,
+    };
+  }
+  
   componentWillMount() {
     this.props.giveBatches()
   }
 
 
+  handleClick(e) {
+    this.setState(() => ({
+      toCreateBatch: true
+    }))
+  }
 
   render() {
+    const {batches, authenticated} = this.props
 
-    const {batches} = this.props
+    if (!authenticated) return (
+			<Redirect to="/login" />
+		)
+    if (this.state.toCreateBatch === true) {
+      return <Redirect to='/createBatch' />
+    }
+    
+
     
     if (batches === null) return null
 
@@ -35,7 +49,7 @@ class BatchOverview extends PureComponent {
         })
         }
       </div>
-        <button>Create Batch</button>         
+        <button onClick={this.handleClick.bind(this)}>Create Batch </button>         
       </div>
         
     )
@@ -43,9 +57,10 @@ class BatchOverview extends PureComponent {
 } 
 
 
-const mapStateToProps = ({batches}) => {
-  return {batches}
-}
+const mapStateToProps = state => ({
+ batches: state.batches,
+ authenticated: state.currentUser!== null
+})
 
 
 export default connect(mapStateToProps, {giveBatches})(BatchOverview)

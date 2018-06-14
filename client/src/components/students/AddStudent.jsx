@@ -11,9 +11,35 @@ import Typography from 'material-ui/Typography'
 import InfoCard from '../layout/InfoCard'
 
 class AddStudent extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+        toBatch: false,
+        };
+    }
 
+
+  handleSaveExit(e) {
+    this.setState(() => ({
+      toBatch: true
+    }))
+  }
+  handleExit(e) {
+    this.setState(() => ({
+      toBatch: true
+    }))
+}
+  handleSaveNew(e) {
+    
+}
+    
 
   render() {
+
+
+    if (this.state.toBatch === true) {
+        return <Redirect to='/StudentOverview' />
+    }
 
     return (  
         <div> 
@@ -36,8 +62,9 @@ class AddStudent extends PureComponent {
                     </div>
                 </form>
             </div>
-            <button>Create student</button>  
-            <button>Save and create new</button>
+            <button onClick={this.handleSaveExit.bind(this)}>save and exit</button>
+            <button onClick={this.handleSaveNew.bind(this)}>save and new</button>   
+            <button onClick={this.handleExit.bind(this)}>exit</button>
         </div>
         
     )
@@ -45,3 +72,4 @@ class AddStudent extends PureComponent {
 } 
 
 export default AddStudent
+
