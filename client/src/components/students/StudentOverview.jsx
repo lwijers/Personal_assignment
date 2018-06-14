@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+
 import {getUsers} from '../../actions/users'
 import {giveStudents} from '../../actions/students'
 import {connect} from 'react-redux'
@@ -21,7 +22,8 @@ class StudentOverview extends PureComponent {
 
 
   componentWillMount() {
-    this.props.giveStudents()
+    console.log(this.props)
+    this.props.giveStudents(this.props.currentBatch.id)
   }
 
   handleAddStudent(e) {
@@ -50,7 +52,7 @@ class StudentOverview extends PureComponent {
 
 
 
-    console.log(students)
+
     return (   
       <div className="outer-paper">
         <div>
@@ -77,8 +79,8 @@ class StudentOverview extends PureComponent {
 } 
 
 
-const mapStateToProps = ({students}) => {
-  return {students}
+const mapStateToProps = ({students, currentBatch}) => {
+  return {students, currentBatch}
 }
 
 

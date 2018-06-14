@@ -6,36 +6,57 @@ import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import {giveSingleStudent} from '../../actions/students'
+import {giveSingleStudent, setCurrentStudent} from '../../actions/students'
 import './styling/studentCard.css'
+// import {setCurrentStudent} from '../../actions/students'
 
 class StudentCard extends PureComponent {
-  componentWillMount() {
-  }
-
-  render() {
-
-    const {student} = this.props
-
-    if (student === null) return null
+    constructor(props) {
+        super(props);
+        this.state = {
+          toStudent: false,
+        };
+      }
     
-    return ( 
-        <div>
-            <div className="card-container">
-                
-                <div className='image-container'>
-                    <div className="inner-image">
-                        <img src={student.pictureURL} className="portrait-image"/> 
-                    </div>
-                    <div className="cardFooter">
-                        <p className="name">{student.firstName}</p>
+
+
+    handleClick(e) {
+        this.props.setCurrentStudent(this.props.student)
+        this.setState(() => ({
+            toStudent: true
+          }))
+    }
+
+    render() {
+
+        const {student} = this.props
+
+        if (student === null) return null
+        
+        if (this.state.toStudent === true) {
+            return <Redirect to='/displayStudent' />
+        }
+
+        return ( 
+            <div>
+                <div 
+                className="card-container"
+                onClick={this.handleClick.bind(this)}
+                >
+                    
+                    <div className='image-container'>
+                        <div className="inner-image">
+                            <img src={student.pictureURL} className="portrait-image"/> 
+                        </div>
+                        <div className="cardFooter">
+                            <p className="name">{student.firstName}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
-  }
+        )
+    }
 }
 
 
-export default StudentCard
+export default connect(null, {setCurrentStudent})(StudentCard)

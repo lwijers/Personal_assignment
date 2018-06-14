@@ -10,41 +10,49 @@ import {giveSingleStudent} from '../../actions/students'
 import './styling/student.css'
 
 class DisplayStudent extends PureComponent {
-  componentWillMount() {
-    this.props.giveSingleStudent()
+  constructor(props) {
+    super(props);
+    this.state = {
+      toBatch: false,
+    };
   }
 
+
   render() {
-    const {students} = this.props
+    if (this.state.toBatch === true) {
+      return <Redirect to='/studentOverview' />
+    }
 
-    if (students === null) return null
-
+    const {currentStudent} = this.props
+    
     return (
     
       <div>
 
         <div className="outer-div">
-          <div className='image-container'>
-          {console.log(this.props)}
-          <img src={this.props.students.pictureURL} className="portrait-image"/> 
+          <div className='image'>
+          <img src={currentStudent.pictureURL} className="portrait-image"/> 
           </div>
           <div>
-            <p>Name: &nbsp;{students.firstName}&nbsp;{students.lastName}</p>
-            <p>email: &nbsp; {students.email}</p>
+            <p>Name: &nbsp;{currentStudent.firstName}&nbsp;{currentStudent.lastName}</p>
+
             <p>ratings:</p>
           </div>
         </div>
         <div>
           <button>add review</button>
+          <button>edit student</button>
+          <button>delete student</button>
         </div>
+        <button>back</button>
       </div>
     
     )
   }
 }
 
-const mapStateToProps = ({students}) => {
-  return {students}
+const mapStateToProps = ({currentStudent}) => {
+  return {currentStudent}
 }
 
 export default connect(mapStateToProps,{giveSingleStudent})(DisplayStudent)

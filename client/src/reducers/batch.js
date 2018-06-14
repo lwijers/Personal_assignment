@@ -4,7 +4,7 @@ import {GIVE__ONE_STUDENT} from '../actions/students'
 export default function (state = null, {type, payload}) {
     switch (type) {
         case GIVE_STUDENTS:
-            return(payload.students)
+            return(payload)
         
         case GIVE__ONE_STUDENT:
             return(payload)
