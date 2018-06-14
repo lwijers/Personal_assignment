@@ -17,7 +17,7 @@ async updatePage(
   @Param('id') id: number,
   @Body() update: Partial<Batch>
 ) {
-  const batch = await Batch.findOneById(id)
+  const batch = await Batch.findOne(id)
   if (!batch) throw new NotFoundError('Cannot find student')
 
   return Batch.merge(batch, update).save()
@@ -27,7 +27,7 @@ async updatePage(
   getbatch(
     @Param('id') id: number
   ) {
-    return Batch.findOneById(id)
+    return Batch.findOne(id)
   }
 
   @Get('/batches')

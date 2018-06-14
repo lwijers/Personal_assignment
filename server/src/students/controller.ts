@@ -17,23 +17,30 @@ async updatePage(
   @Param('id') id: number,
   @Body() update: Partial<Student>
 ) {
-  const student = await Student.findOneById(id)
+  const student = await Student.findOne(id)
   if (!student) throw new NotFoundError('Cannot find student')
 
   return Student.merge(student, update).save()
 }
 
-@Get('/students/:id([0-9]+)')
-  getStudents(
-    @Param('id') id: number
-  ) {
-    return Student.findOneById(id)
-  }
+// @Get('/students/:id([0-9]+)')
+//   getStudents(
+//     @Param('id') id: number
+//   ) {
+//     return Student.findOneById(id)
+//   }
 
   @Get('/students')
   async allStudents() {
     const students = await Student.find()
     return { students }
+  }
+
+  @Get('/students/:batchID([0-9]+)')
+  getStudentsByBatch(
+    @Param('batchID') batchID: number
+  ) {
+    return Student.find({where :{batch: batchID}})
   }
 
 // @Delete('/students/:id([0-9]+)')

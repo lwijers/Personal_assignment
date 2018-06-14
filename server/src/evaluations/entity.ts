@@ -1,7 +1,7 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn } from 'typeorm'
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne} from 'typeorm'
 import {IsString, IsNumber } from 'class-validator';
 import {Type} from "class-transformer";
-
+import Student from '../students/entity'
 
 @Entity()
 export default class Evaluation extends BaseEntity {
@@ -20,6 +20,9 @@ export default class Evaluation extends BaseEntity {
   @IsString()
   @Column('text')
   remark: string
+  
+  @ManyToOne(type => Student, student => student.evaluations)
+  student: Student;
 
 }
 

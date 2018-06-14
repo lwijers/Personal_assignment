@@ -2,3 +2,18 @@
     width: 500px;
     display: flex;
 }
+
+
+.image-container {
+    margin: 0px;
+    padding: 0px;
+    background: maroon;
+}
+
+.name {
+    margin: 0px;
+    padding: 0px;
+    margin-left: 2px;
+    margin-bottom: 2px;
+    color: white;
+}

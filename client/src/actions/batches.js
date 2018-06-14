@@ -1,10 +1,10 @@
 import * as request from 'superagent'
 import {baseUrl} from '../constants'
 
-
-
 export const GIVE_BATCHES = 'GIVE_BATCHES'
 export const GIVE_BATCH = 'GIVE_BATCH'
+export const SET_CURRENT_BATCH = 'SET_CURRENT_BATCH'
+
 
 export const giveBatches = () => dispatch => {
     request
@@ -30,10 +30,16 @@ export const giveSingleBatch = () => dispatch => {
     .catch(err => console.error(err))
 }
 
-
-export const createBatch = (batch) => (dispatch, getState) => {
+export const createBatch = (batch) => (dispatch) => {
     request
       .post(`${baseUrl}/batches`)
       .send(batch)
       .catch(err => console.error(err))
+  }
+
+export const setCurrentBatch = (batch) => {
+    return {
+        type: SET_CURRENT_BATCH,
+        payload: batch
+    }
   }
