@@ -36,6 +36,14 @@ async updatePage(
     return { evaluation }
   }
 
+  @Get('/studentEvaluations/:studentID([0-9]+)')
+  getEvalByStudent(
+    @Param('studentID') studentID: number
+  ) {
+    return Evaluation.find({where :{student: studentID}})
+  }
+
+
 // @Delete('/students/:id([0-9]+)')
 // async deleteStudent(
 //   @Param('id') id: number

@@ -3,6 +3,7 @@ import {baseUrl} from '../constants'
 
 
 export const GIVE_EVALUATION = 'GIVE_EVALUATION'
+export const GIVE_STUDENT_EVALUATIONS = 'GIVE_STUDENT_EVALUATIONS'
 
 export const giveEvaluation = () => dispatch => {
     
@@ -23,4 +24,17 @@ export const addEvaluation = (evaluation) => dispatch => {
     .post(`${baseUrl}/evaluations`)
     .send(evaluation)
     .catch(err => console.error(err)) 
+}
+
+export const giveEvalByStud = (id) => dispatch => {
+    
+    request
+    .get(`${baseUrl}/studentEvaluations/${id}`)
+    .then(response => {
+        dispatch({
+            type: GIVE_STUDENT_EVALUATIONS,
+            payload: response.body
+        })
+    })
+    .catch(err => console.error(err))
 }

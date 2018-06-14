@@ -7,6 +7,8 @@ import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import {giveSingleStudent} from '../../actions/students'
+import {giveEvalByStud} from '../../actions/evaluations'
+
 import './styling/student.css'
 
 class DisplayStudent extends PureComponent {
@@ -14,8 +16,14 @@ class DisplayStudent extends PureComponent {
     super(props);
     this.state = {
       toAddEvaluation: false,
+      toBatch: false
     };
   }
+
+  componentWillMount() {
+    this.props.giveEvalByStud(this.props.currentStudent.id)
+  }
+
 
   handleAddEvaluation(e) {
     this.setState(() => ({
@@ -23,15 +31,38 @@ class DisplayStudent extends PureComponent {
     }))
   }
 
+  handleBackClick(e) {
+    this.setState(() => ({
+      toBatch: true
+    }))
+  }
+
+
+  renderScore(score, date){
+
+    let scoreTable = {1:"red", 2:"yellow", 3:"green"}
+    console.log(' adf')
+    return (
+      <div >
+        <div className="scoreDisplay" id={scoreTable[score]}></div>
+      </div>
+    )
+  }
 
 
   render() {
     if (this.state.toAddEvaluation === true) {
       return <Redirect to='/addEvaluation' />
+    } else if (this.state.toBatch === true) {
+      return <Redirect to='/studentOverview' />
     }
 
-    const {currentStudent} = this.props
+
+    const {currentStudent, studentEvaluations} = this.props
+
     
+    if (studentEvaluations === null) return null
+
     return (
     
       <div>
@@ -45,6 +76,11 @@ class DisplayStudent extends PureComponent {
 
             <p>ratings:</p>
           </div>
+          <div className="scoreContainer">
+            {studentEvaluations.map((evaluation) => {
+              return this.renderScore(evaluation.score, evaluation.date)
+            })}
+          </div>
         </div>
         <div>
           <button
@@ -52,15 +88,17 @@ class DisplayStudent extends PureComponent {
           <button>edit student</button>
           <button>delete student</button>
         </div>
-        <button>back</button>
+        <button
+        onClick={this.handleBackClick.bind(this)}
+        >back</button>
       </div>
     
     )
   }
 }
 
-const mapStateToProps = ({currentStudent}) => {
-  return {currentStudent}
+const mapStateToProps = ({currentStudent, studentEvaluations}) => {
+  return {currentStudent, studentEvaluations}
 }
 
-export default connect(mapStateToProps,{giveSingleStudent})(DisplayStudent)
+export default connect(mapStateToProps,{giveSingleStudent, giveEvalByStud})(DisplayStudent)
