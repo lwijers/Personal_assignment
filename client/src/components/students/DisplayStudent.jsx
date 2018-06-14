@@ -22,7 +22,6 @@ class DisplayStudent extends PureComponent {
 
   componentWillMount() {
     this.props.giveEvalByStud(this.props.currentStudent.id)
-    // console.log()
   }
 
 
@@ -38,6 +37,19 @@ class DisplayStudent extends PureComponent {
     }))
   }
 
+
+  renderScore(score, date){
+
+    let scoreTable = {1:"red", 2:"yellow", 3:"green"}
+    console.log(' adf')
+    return (
+      <div >
+        <div className="scoreDisplay" id={scoreTable[score]}></div>
+      </div>
+    )
+  }
+
+
   render() {
     if (this.state.toAddEvaluation === true) {
       return <Redirect to='/addEvaluation' />
@@ -46,8 +58,11 @@ class DisplayStudent extends PureComponent {
     }
 
 
-    const {currentStudent} = this.props
+    const {currentStudent, studentEvaluations} = this.props
+
     
+    if (studentEvaluations === null) return null
+
     return (
     
       <div>
@@ -60,6 +75,11 @@ class DisplayStudent extends PureComponent {
             <p>Name: &nbsp;{currentStudent.firstName}&nbsp;{currentStudent.lastName}</p>
 
             <p>ratings:</p>
+          </div>
+          <div className="scoreContainer">
+            {studentEvaluations.map((evaluation) => {
+              return this.renderScore(evaluation.score, evaluation.date)
+            })}
           </div>
         </div>
         <div>

@@ -40,6 +40,7 @@ class BatchOverview extends PureComponent {
 
     return (  
       <div> 
+        <h1>Batch Overview</h1>
       <div className="outer-div">
       <Typography variant="headline" component="h2">
           Your Batches:

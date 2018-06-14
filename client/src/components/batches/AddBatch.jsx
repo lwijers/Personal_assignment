@@ -68,7 +68,7 @@ class AddBatch extends PureComponent {
 
     render() {
         if (this.state.toBatch === true) {
-            return <Redirect to='/studentOverview' />
+            return <Redirect to='/batchoverview' />
         } else if (this.state.toBatches === true) {
             return <Redirect to='/' />
         }

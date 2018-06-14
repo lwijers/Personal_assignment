@@ -41,13 +41,13 @@ class InfoCard extends PureComponent {
       className="info-card"
       onClick={this.handleCardClick.bind(this)}
       >
-        <Typography variant="headline" component="h2">
-          <h2>Batch:&nbsp;{batch.id}</h2>
-        </Typography>
-        <Typography>
+        <p >
+          Batch:&nbsp;{batch.id}
+        </p>
+        <p>
           start date: {batch.startDate}
           end date: {batch.endDate}
-        </Typography>
+        </p>
     </Card>
     )
   }
