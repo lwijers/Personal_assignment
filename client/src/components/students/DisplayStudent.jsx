@@ -16,7 +16,8 @@ class DisplayStudent extends PureComponent {
     super(props);
     this.state = {
       toAddEvaluation: false,
-      toBatch: false
+      toBatch: false,
+      toEvaluation: false
     };
   }
 
@@ -37,14 +38,30 @@ class DisplayStudent extends PureComponent {
     }))
   }
 
+  handleDeleteStudent(e) {
+  
+  }
+
+  handleToEvaluation(e) {
+    this.setState(() => ({
+      toEvaluation: true
+    }))
+  }
 
   renderScore(score, date){
+    const month =  date.slice(8,10)
+    const day = date.slice(5,7)
 
     let scoreTable = {1:"red", 2:"yellow", 3:"green"}
-    console.log(' adf')
     return (
       <div >
-        <div className="scoreDisplay" id={scoreTable[score]}></div>
+        <div 
+        className="scoreDisplay" 
+        id={scoreTable[score]} 
+        onClick={this.handleToEvaluation.bind(this)}
+        >
+        </div>
+        <div>{day}/{month}</div>
       </div>
     )
   }
@@ -55,6 +72,8 @@ class DisplayStudent extends PureComponent {
       return <Redirect to='/addEvaluation' />
     } else if (this.state.toBatch === true) {
       return <Redirect to='/studentOverview' />
+    } else if (this.state.toEvaluation === true) {
+      return <Redirect to='/displayEvaluation' />
     }
 
 
@@ -84,9 +103,14 @@ class DisplayStudent extends PureComponent {
         </div>
         <div>
           <button
-          onClick={this.handleAddEvaluation.bind(this)}>add evaluation</button>
+          onClick={this.handleAddEvaluation.bind(this)}
+          >add evaluation</button>
+          
           <button>edit student</button>
-          <button>delete student</button>
+          
+          <button
+          onClick={this.handleDeleteStudent.bind(this)}
+          >delete student</button>
         </div>
         <button
         onClick={this.handleBackClick.bind(this)}

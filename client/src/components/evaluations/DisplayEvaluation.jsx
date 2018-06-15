@@ -9,26 +9,41 @@ import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import InfoCard from '../layout/InfoCard'
 import {giveEvaluation} from '../../actions/evaluations'
-
+import './evaluationForm.css'
 
 class DisplayEvaluation extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toStudent: false
+    }
+  }
   componentWillMount() {
     this.props.giveEvaluation()
   }
 
+  handleBack(e) {
+    this.setState(() => ({
+      toStudent: true
+      }))
+  }
 
   render() {
     if (this.props.evaluation === null) return null
 
-    const {evaluation} = this.props
+    const {evaluation, currentStudent} = this.props
     
+    if (this.state.toStudent === true) {
+      return <Redirect to='/displayStudent' />
+    }
+
     return (  
       <div> 
         <div>
           <h1>evaluation</h1>
         </div>
         <div>
-          <p>student name:</p>
+          <p>student name: {currentStudent.firstName}&nbsp;{currentStudent.lastName}</p>
         </div>
         <div>
           <p>date:&nbsp;{evaluation.date}</p>
@@ -39,18 +54,18 @@ class DisplayEvaluation extends PureComponent {
         <div>
           <p>remark:</p>
         </div>
-        <div>
-          {evaluation.remark}
+        <div className="remark">
+          <i className="t">{evaluation.remark}</i>
         </div>
-        <button>back</button>         
+        <button onClick={this.handleBack.bind(this)}>back</button>         
 
       </div>
         
     )
   }
 } 
-const mapStateToProps = ({evaluation}) => {
-  return {evaluation}
+const mapStateToProps = ({evaluation, currentStudent}) => {
+  return {evaluation, currentStudent}
 }
 
 export default connect(mapStateToProps,{giveEvaluation})(DisplayEvaluation)

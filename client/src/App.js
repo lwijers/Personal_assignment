@@ -22,7 +22,7 @@ class App extends Component {
             <TopBar />
           </nav>
           <main style={{marginTop:75}}>
-            <Route exact path="/" render={ () => <Redirect to="/batchoverview" /> } />
+            <Route exact path="/" render={ () => <Redirect to="/login" /> } />
             <Route exact path="/batchoverview" component={BatchOverview} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/logout" component={LogoutPage} />
