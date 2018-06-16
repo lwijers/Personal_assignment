@@ -2,9 +2,9 @@ import { JsonController, Post, Put, Param, Get, Body, HttpCode, NotFoundError } 
 import Batch from './entity';
 
 @JsonController()
-export default class BatchesController {
+export default class ClassesController {
 
-    @Post('/batches')
+    @Post('/classes')
 @HttpCode(201)
 createbatches(
   @Body() batch : Batch
@@ -12,7 +12,7 @@ createbatches(
   return batch.save()
 }
 
-@Put('/batches/:id')
+@Put('/classes/:id')
 async updatePage(
   @Param('id') id: number,
   @Body() update: Partial<Batch>
@@ -23,17 +23,17 @@ async updatePage(
   return Batch.merge(batch, update).save()
 }
 
-@Get('/batches/:id([0-9]+)')
+@Get('/classes/:id([0-9]+)')
   getbatch(
     @Param('id') id: number
   ) {
     return Batch.findOne(id)
   }
 
-  @Get('/batches')
+  @Get('/classes/giveAll')
   async allbatches() {
-    const batches = await Batch.find()
-    return { batches }
+    const classes = await Batch.find()
+    console.log(classes)
+    return { classes }
   }
-
 }

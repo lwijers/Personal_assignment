@@ -6,7 +6,7 @@ import User from './users/entity'
 
 import Student from './students/entity'
 import Evaluation from './evaluations/entity'
-import Batch from './batches/entity'
+import Batch from './classes/entity'
 
 class CustomNamingStrategy extends DefaultNamingStrategy implements NamingStrategyInterface {
 

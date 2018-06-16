@@ -13,7 +13,7 @@ import * as socketIoJwtAuth from 'socketio-jwt-auth'
 import {secret} from './jwt'
 import StudentController from './students/controller'
 import EvaluationController from './evaluations/controller'
-import BatchController from './batches/controller'
+import classesController from './classes/controller'
 
 const app = new Koa()
 const server = new Server(app.callback())
@@ -23,12 +23,13 @@ const port = process.env.PORT || 4000
 useKoaServer(app, {
   cors: true,
   controllers: [
-    BatchController,
+    classesController,
     EvaluationController,
     StudentController,
     UserController,
     LoginController,
   ],
+
   authorizationChecker: (action: Action) => {
     const header: string = action.request.headers.authorization
     if (header && header.startsWith('Bearer ')) {
@@ -44,6 +45,8 @@ useKoaServer(app, {
 
     return false
   },
+
+
   currentUserChecker: async (action: Action) => {
     const header: string = action.request.headers.authorization
     if (header && header.startsWith('Bearer ')) {

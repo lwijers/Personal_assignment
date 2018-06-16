@@ -1,7 +1,7 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm'
 
 import { MinLength, IsString } from 'class-validator';
-import Batch from '../batches/entity'
+import Batch from '../classes/entity'
 import Evaluation from '../evaluations/entity'
 
 @Entity()
