@@ -8,7 +8,7 @@ import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import './InfoCard.css'
-
+import {Link} from 'react-router-dom'
 
 class InfoCard extends PureComponent {
   constructor(props) {
@@ -22,16 +22,16 @@ class InfoCard extends PureComponent {
 
   handleCardClick(e) {
     this.props.setCurrentBatch(this.props.batch)
-    this.setState(() => ({
-      toBatch: true
-    }))
+    // this.setState(() => ({
+    //   toBatch: true
+    // }))
   }
 
   
   render() {
-    if (this.state.toBatch === true) {
-      return <Redirect to='/studentOverview' />
-    }
+    // if (this.state.toBatch === true) {
+    //   return <Redirect to='/studentOverview' />
+    // }
     
     const {batch} = this.props
 
@@ -41,6 +41,7 @@ class InfoCard extends PureComponent {
       className="info-card"
       onClick={this.handleCardClick.bind(this)}
       >
+        <Link to={`/class`} style={{textDecoration: 'none'}}>
         <p >
           Batch:&nbsp;{batch.id}
         </p>
@@ -48,6 +49,7 @@ class InfoCard extends PureComponent {
           start date: {batch.startDate}
           end date: {batch.endDate}
         </p>
+        </Link>
     </Card>
     )
   }

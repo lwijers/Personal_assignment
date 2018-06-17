@@ -4,7 +4,7 @@ import Student from './entity';
 @JsonController()
 export default class StudentController {
 
-    @Post('/students')
+    @Post('/student/createNew')
 @HttpCode(201)
 createStudent(
   @Body() student: Student
@@ -36,12 +36,12 @@ async updatePage(
     return { students }
   }
 
-  @Get('/students/:batchID([0-9]+)')
-  getStudentsByBatch(
-    @Param('batchID') batchID: number
-  ) {
-    return Student.find({where :{batch: batchID}})
-  }
+  // @Get('/class/:batchID([0-9]+)')
+  // getStudentsByBatch(
+  //   @Param('batchID') batchID: number
+  // ) {
+  //   return Student.find({where :{batch: batchID}})
+  // }
 
 // @Delete('/students/:id([0-9]+)')
 // async deleteStudent(

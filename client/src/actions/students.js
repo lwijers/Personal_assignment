@@ -8,7 +8,7 @@ export const SET_CURRENT_STUDENT = 'SET_CURRENT_STUDENT'
 export const giveStudents = (id) => dispatch => {
     
     request
-    .get(`${baseUrl}/students/${id}`)
+    .get(`${baseUrl}/getClass/${id}`)
     .then(response => {
         dispatch({
             type: GIVE_STUDENTS,
@@ -31,7 +31,7 @@ export const giveSingleStudent = () => dispatch => {
 
 export const addStudent = (student) => (dispatch) => {
     request
-      .post(`${baseUrl}/students`)
+      .post(`${baseUrl}/student/createNew`)
       .send(student)
       .catch(err => console.error(err))
   }

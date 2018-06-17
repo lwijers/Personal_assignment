@@ -3,11 +3,8 @@ import {getUsers} from '../../actions/users'
 import {giveBatches} from '../../actions/batches'
 import {addEvaluation} from '../../actions/evaluations'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import Typography from 'material-ui/Typography'
 import './evaluationForm.css'
 
 
@@ -17,7 +14,7 @@ class AddEvaluation extends PureComponent {
     super(props);
     this.state = {
       currentDate: new Date().toISOString().slice(0,10),
-      toStudent: false,
+
       selectedBox: "",
       score: 0,
       remark: "",
@@ -26,7 +23,6 @@ class AddEvaluation extends PureComponent {
         yellow: false,
         green: false
       },
-
     }
   }
 
@@ -59,9 +55,6 @@ class AddEvaluation extends PureComponent {
       remark: this.state.remark,
       student: this.props.student
     })
-    this.setState(() => ({
-      toStudent: true
-      }))
   }
 
   scoreCalculator(){
@@ -71,7 +64,7 @@ class AddEvaluation extends PureComponent {
       'yellow' : 2,
       'green' : 3
     }
-    console.log(score)
+
     return scoreTable[score]
   }
 
@@ -92,10 +85,6 @@ class AddEvaluation extends PureComponent {
   }
   
   render() {
-    if (this.state.toStudent === true) {
-      return <Redirect to='/displayStudent' />
-  }
-
     
     return (  
       <div> 
@@ -129,10 +118,12 @@ class AddEvaluation extends PureComponent {
             </div>
             
           </form>
-          <button
-            onClick={this.handleSaveExit.bind(this)}
-            >
-            save evaluation</button> 
+          <Link to={`/student`} style={{textDecoration: 'none'}}>
+            <button
+              onClick={this.handleSaveExit.bind(this)}
+              >
+              save evaluation</button> 
+            </Link>
         </div>
 
       </div>

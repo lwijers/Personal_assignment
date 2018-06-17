@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
@@ -12,71 +12,43 @@ import {giveEvalByStud} from '../../actions/evaluations'
 import './styling/student.css'
 
 class DisplayStudent extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toAddEvaluation: false,
-      toBatch: false,
-      toEvaluation: false
-    };
-  }
 
   componentWillMount() {
+
     this.props.giveEvalByStud(this.props.currentStudent.id)
-  }
-
-
-  handleAddEvaluation(e) {
-    this.setState(() => ({
-      toAddEvaluation: true
-    }))
-  }
-
-  handleBackClick(e) {
-    this.setState(() => ({
-      toBatch: true
-    }))
   }
 
   handleDeleteStudent(e) {
   
   }
 
-  handleToEvaluation(e) {
-    this.setState(() => ({
-      toEvaluation: true
-    }))
-  }
+
 
   renderScore(score, date){
     const month =  date.slice(8,10)
     const day = date.slice(5,7)
 
-    let scoreTable = {1:"red", 2:"yellow", 3:"green"}
+    const scoreTable = {1:"red", 2:"yellow", 3:"green"}
     return (
-      <div >
-        <div 
-        className="scoreDisplay" 
-        id={scoreTable[score]} 
-        onClick={this.handleToEvaluation.bind(this)}
-        >
-        </div>
-        <div>{day}/{month}</div>
+      <div>
+        <Link to={`/evaluation`} style={{textDecoration: 'none'}}>
+          <div 
+          className="scoreDisplay" 
+          id={scoreTable[score]} 
+          >
+          </div>
+          </Link>
+
+          <div>
+            {day}/{month}
+          </div>
+
       </div>
     )
   }
 
 
   render() {
-    if (this.state.toAddEvaluation === true) {
-      return <Redirect to='/addEvaluation' />
-    } else if (this.state.toBatch === true) {
-      return <Redirect to='/studentOverview' />
-    } else if (this.state.toEvaluation === true) {
-      return <Redirect to='/displayEvaluation' />
-    }
-
-
     const {currentStudent, studentEvaluations} = this.props
 
     
@@ -102,19 +74,19 @@ class DisplayStudent extends PureComponent {
           </div>
         </div>
         <div>
-          <button
-          onClick={this.handleAddEvaluation.bind(this)}
-          >add evaluation</button>
-          
-          <button>edit student</button>
-          
-          <button
-          onClick={this.handleDeleteStudent.bind(this)}
-          >delete student</button>
+          <Link to={`/evaluation/createNew`} style={{textDecoration: 'none'}}>
+            <button>Add Evaluation</button>
+          </Link>
+          <Link to={`/classes`} style={{textDecoration: 'none'}}>
+            <button>Edit Student</button>
+          </Link>
+          <Link to={`/classes`} style={{textDecoration: 'none'}}>
+            <button>Delete Student</button>
+          </Link>
         </div>
-        <button
-        onClick={this.handleBackClick.bind(this)}
-        >back</button>
+        <Link to={`/class`} style={{textDecoration: 'none'}}>
+          <button>Back</button>
+        </Link>
       </div>
     
     )

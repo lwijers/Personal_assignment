@@ -2,8 +2,8 @@ import users from './users'
 import login from './login'
 import signup from './signup'
 import students from './batch'
-import batches from './batches'
-import evaluation from './evaluations'
+import classes from './batches'
+import currentEvaluation from './evaluations'
 import currentStudent from './students'
 import currentUser from './currentUser'
 import currentBatch from './currentBatch'
@@ -15,9 +15,9 @@ export default {
   currentStudent,
   currentBatch,
   currentUser,
-  evaluation,
+  currentEvaluation,
   students,
-  batches,
+  classes,
   users,
   login,
   signup

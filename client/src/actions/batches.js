@@ -7,10 +7,11 @@ export const SET_CURRENT_BATCH = 'SET_CURRENT_BATCH'
 
 
 export const giveBatches = () => dispatch => {
+
     request
-    .get(`${baseUrl}/batches`)
+    .get(`${baseUrl}/classes/giveAll`)
     .then(response => {
-        dispatch({
+         dispatch({
             type: GIVE_BATCHES,
             payload: response.body
         })
@@ -20,7 +21,7 @@ export const giveBatches = () => dispatch => {
 
 export const giveSingleBatch = () => dispatch => {
     request
-    .get(`${baseUrl}/batches/1`)
+    .get(`${baseUrl}/classes/1`)
     .then(response => {
         dispatch({
             type: GIVE_BATCH,
@@ -32,7 +33,7 @@ export const giveSingleBatch = () => dispatch => {
 
 export const createBatch = (batch) => (dispatch) => {
     request
-      .post(`${baseUrl}/batches`)
+      .post(`${baseUrl}/classes`)
       .send(batch)
       .catch(err => console.error(err))
   }

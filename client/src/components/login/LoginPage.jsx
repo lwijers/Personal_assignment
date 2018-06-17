@@ -11,7 +11,8 @@ class LoginPage extends PureComponent {
 
 	render() {
 		if (this.props.currentUser) return (
-			<Redirect to="/" />
+			<Redirect to="/batches
+			" />
 		)
 
 		return (
@@ -29,7 +30,7 @@ class LoginPage extends PureComponent {
 const mapStateToProps = function (state) {
 	return {
 		currentUser: state.currentUser,
-    error: state.login.error
+    	error: state.login.error
 	}
 }
 

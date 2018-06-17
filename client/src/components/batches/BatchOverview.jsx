@@ -1,19 +1,14 @@
 import React, {PureComponent} from 'react'
 import {giveBatches} from '../../actions/batches'
 import {connect} from 'react-redux'
-import {Redirect, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Typography from 'material-ui/Typography'
 import InfoCard from '../layout/InfoCard'
 
-class BatchOverview extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toCreateBatch: false,
-    };
-  }
-  
+class Classes extends PureComponent {
+
   componentWillMount() {
+
     this.props.giveBatches()
   }
 
@@ -24,19 +19,28 @@ class BatchOverview extends PureComponent {
     }))
   }
 
+  // randomFromList(list) {
+  //   return  list[Math.floor(Math.random() * list.length)];
+  // }
+
+  // giveRandomStudent() {
+  //       const randomizer = Math.random()
+  //       let studentToAsk = {}
+
+  //       if (randomizer < 0.45) {
+  //         studentToAsk = this.randomFromList(this.redList)  
+  //       } else if (randomizer > 0.79) {
+  //         studentToAsk = this.randomFromList(this.greenList)
+  //       } else {
+  //         studentToAsk = this.randomFromList(this.yellowList)
+  //       }
+  // }
+
   render() {
-    const {batches, authenticated} = this.props
-
-    if (!authenticated) return (
-			<Redirect to="/login" />
-		)
-    if (this.state.toCreateBatch === true) {
-      return <Redirect to='/createBatch' />
-    }
+    const {classes, authenticated} = this.props
+   
+    if (classes === null) return null
     
-
-    
-    if (batches === null) return null
 
     return (  
       <div> 
@@ -44,13 +48,17 @@ class BatchOverview extends PureComponent {
       <div className="outer-div">
       <Typography variant="headline" component="h2">
           Your Batches:
-        </Typography>
-        {batches.map((batch) => {
+      </Typography>
+
+        {classes.map((batch) => {
+          
           return <InfoCard batch={batch}/>
         })
         }
       </div>
-        <button onClick={this.handleClick.bind(this)}>Create Batch </button>         
+        <Link to={`/classes/createNew`} style={{textDecoration: 'none'}}>
+          <button onClick={this.handleClick.bind(this)}>Create Batch </button>
+        </Link>         
       </div>
         
     )
@@ -59,9 +67,9 @@ class BatchOverview extends PureComponent {
 
 
 const mapStateToProps = state => ({
- batches: state.batches,
+ classes: state.classes === null ? null : state.classes[0],
  authenticated: state.currentUser!== null
 })
 
 
-export default connect(mapStateToProps, {giveBatches})(BatchOverview)
+export default connect(mapStateToProps, {giveBatches})(Classes)

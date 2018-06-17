@@ -1,14 +1,14 @@
 import React, {PureComponent} from 'react'
 import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import {giveSingleStudent, setCurrentStudent} from '../../actions/students'
+import {setCurrentStudent} from '../../actions/students'
 import './styling/studentCard.css'
-// import {setCurrentStudent} from '../../actions/students'
+
 
 class StudentCard extends PureComponent {
     constructor(props) {
@@ -22,9 +22,6 @@ class StudentCard extends PureComponent {
 
     handleClick(e) {
         this.props.setCurrentStudent(this.props.student)
-        this.setState(() => ({
-            toStudent: true
-          }))
     }
 
     render() {
@@ -32,13 +29,9 @@ class StudentCard extends PureComponent {
         const {student} = this.props
 
         if (student === null) return null
-        
-        if (this.state.toStudent === true) {
-            return <Redirect to='/displayStudent' />
-        }
 
         return ( 
-            <div>
+            <Link to={`/student`} style={{textDecoration: 'none'}}>
                 <div 
                 className="card-container"
                 onClick={this.handleClick.bind(this)}
@@ -53,7 +46,7 @@ class StudentCard extends PureComponent {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Link>
         )
     }
 }

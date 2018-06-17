@@ -6,7 +6,6 @@ export const GIVE_EVALUATION = 'GIVE_EVALUATION'
 export const GIVE_STUDENT_EVALUATIONS = 'GIVE_STUDENT_EVALUATIONS'
 
 export const giveEvaluation = () => dispatch => {
-    
     request
     .get(`${baseUrl}/evaluations/1`)
     .then(response => {
@@ -19,7 +18,7 @@ export const giveEvaluation = () => dispatch => {
 }
 
 export const addEvaluation = (evaluation) => dispatch => {
-    console.log(evaluation)
+
     request
     .post(`${baseUrl}/evaluations`)
     .send(evaluation)
@@ -27,10 +26,11 @@ export const addEvaluation = (evaluation) => dispatch => {
 }
 
 export const giveEvalByStud = (id) => dispatch => {
-    
+
     request
     .get(`${baseUrl}/studentEvaluations/${id}`)
     .then(response => {
+        console.log(response)
         dispatch({
             type: GIVE_STUDENT_EVALUATIONS,
             payload: response.body

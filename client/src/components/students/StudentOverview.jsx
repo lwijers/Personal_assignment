@@ -3,7 +3,7 @@ import React, {PureComponent} from 'react'
 import {getUsers} from '../../actions/users'
 import {giveStudents} from '../../actions/students'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
@@ -12,17 +12,8 @@ import InfoCard from '../layout/InfoCard'
 import StudentCard from './StudentCard'
 
 class StudentOverview extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toCreateStudent: false,
-      toBatches: false
-    };
-  }
-
 
   componentWillMount() {
-
     this.props.giveStudents(this.props.currentBatch.id)
   }
 
@@ -40,17 +31,9 @@ class StudentOverview extends PureComponent {
 
   render() {
 
-    if (this.state.toAddStudent === true) {
-      return <Redirect to='/addStudent' />
-    } else if (this.state.toBatches === true) {
-      return <Redirect to='/batchoverview' />
-    }
-
     const {students} = this.props
     
     if (students === null) return null
-
-
 
 
     return (   
@@ -67,10 +50,14 @@ class StudentOverview extends PureComponent {
           })}
         </div>
         <div>
+          <Link to={`/student/createNew`} style={{textDecoration: 'none'}}>
             <button onClick={this.handleAddStudent.bind(this)} >add student</button>
+          </Link>
         </div>
         <div>
+          <Link to={`/classes`} style={{textDecoration: 'none'}}>
             <button onClick={this.handleBack.bind(this)} >back</button>
+          </Link>
         </div>
       </div>
       

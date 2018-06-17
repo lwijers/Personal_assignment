@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 import {getUsers} from '../../actions/users'
 import {giveBatches, createBatch} from '../../actions/batches'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
@@ -13,8 +13,6 @@ class AddBatch extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-          toBatch: false,
-          toBatches:false,
           batchNumber: 0,
           startDate: new Date().toISOString().slice(0,10),
           endDate: ""       
@@ -27,9 +25,6 @@ class AddBatch extends PureComponent {
             startDate: this.state.startDate, 
             endDate: this.state.endDate
         })
-        this.setState(() => ({
-            toBatch: true
-        }))
     }
 
     handleChange(e) {
@@ -59,20 +54,8 @@ class AddBatch extends PureComponent {
         }))
     }  
 
-
-    handleBack(e) {
-        this.setState(() => ({
-            toBatches: true
-        }))
-    }
-
     render() {
-        if (this.state.toBatch === true) {
-            return <Redirect to='/batchoverview' />
-        } else if (this.state.toBatches === true) {
-            return <Redirect to='/' />
-        }
-    
+
     return (  
         <div> 
             <div>
@@ -106,9 +89,10 @@ class AddBatch extends PureComponent {
                     </div>
                 </form>
             </div>
-            <button onClick={this.handleCreateBatch.bind(this)}>Create Batch</button>  
-
-            <button onClick={this.handleBack.bind(this)}>back</button>
+            <Link to={`/classes`} style={{textDecoration: 'none'}}>
+                <button onClick={this.handleCreateBatch.bind(this)}>Create Batch</button>  
+                <button>back</button>
+            </Link>
         </div>       
     )
   }

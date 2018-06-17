@@ -7,11 +7,12 @@ import './App.css'
 import TopBar from './components/layout/TopBar'
 import DisplayStudent from './components/students/DisplayStudent'
 import StudentOverview from './components/students/StudentOverview'
-import BatchOverview from './components/batches/BatchOverview'
+import Classes from './components/batches/BatchOverview'
 import AddBatch from './components/batches/AddBatch'
 import AddStudent from './components/students/AddStudent'
 import DisplayEvaluation from './components/evaluations/DisplayEvaluation'
 import AddEvaluation from './components/evaluations/AddEvaluation'
+
 
 class App extends Component {
   render() {
@@ -22,17 +23,23 @@ class App extends Component {
             <TopBar />
           </nav>
           <main style={{marginTop:75}}>
-            <Route exact path="/" render={ () => <Redirect to="/login" /> } />
-            <Route exact path="/batchoverview" component={BatchOverview} />
+            <Route exact path="/" render={ () => <Redirect to="classes" /> } />
+            
+            <Route exact path="/classes" component={Classes} />
+
+            <Route exact path="/class" component={StudentOverview} />
+            <Route exact path="/classes/createNew" component={AddBatch} />
+
+            <Route exact path="/student" component={DisplayStudent} />
+            <Route exact path="/student/createNew" component={AddStudent} />
+            
+            <Route exact path="/evaluation" component={DisplayEvaluation} />
+            <Route exact path="/evaluation/createNew" component={AddEvaluation} />
+
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/signup" component={SignupPage} />
-            <Route exact path="/createBatch" component={AddBatch} />
-            <Route exact path="/addStudent" component={AddStudent} />
-            <Route exact path="/displayStudent" component={DisplayStudent} />
-            <Route exact path="/studentOverview" component={StudentOverview} />
-            <Route exact path="/displayEvaluation" component={DisplayEvaluation} />
-            <Route exact path="/addEvaluation" component={AddEvaluation} />
+
           </main>
         </div>
       </Router>
