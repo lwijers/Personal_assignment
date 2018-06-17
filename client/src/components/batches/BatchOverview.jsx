@@ -9,34 +9,14 @@ class Classes extends PureComponent {
 
   componentWillMount() {
 
-    this.props.giveBatches()
+    if (this.props.classes === null) this.props.giveBatches() 
   }
 
 
-  handleClick(e) {
-    this.setState(() => ({
-      toCreateBatch: true
-    }))
-  }
 
-  // randomFromList(list) {
-  //   return  list[Math.floor(Math.random() * list.length)];
-  // }
-
-  // giveRandomStudent() {
-  //       const randomizer = Math.random()
-  //       let studentToAsk = {}
-
-  //       if (randomizer < 0.45) {
-  //         studentToAsk = this.randomFromList(this.redList)  
-  //       } else if (randomizer > 0.79) {
-  //         studentToAsk = this.randomFromList(this.greenList)
-  //       } else {
-  //         studentToAsk = this.randomFromList(this.yellowList)
-  //       }
-  // }
 
   render() {
+
     const {classes, authenticated} = this.props
    
     if (classes === null) return null
@@ -57,7 +37,7 @@ class Classes extends PureComponent {
         }
       </div>
         <Link to={`/classes/createNew`} style={{textDecoration: 'none'}}>
-          <button onClick={this.handleClick.bind(this)}>Create Batch </button>
+          <button >Create Batch </button>
         </Link>         
       </div>
         

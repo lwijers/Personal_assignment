@@ -8,6 +8,7 @@ import currentStudent from './students'
 import currentUser from './currentUser'
 import currentBatch from './currentBatch'
 import studentEvaluations from './studentEvaluations'
+import studentTotalScore from './studentTotalScore'
 
 
 export default {
@@ -20,5 +21,6 @@ export default {
   classes,
   users,
   login,
-  signup
+  signup,
+  studentTotalScore
 }

@@ -24,6 +24,13 @@ export default class Student extends BaseEntity {
   @Column('text')
   lastName: string
 
+  @Column('integer')
+  totalScore: number
+
+  @Column('text')
+  colorCode: string
+
+
 
   @ManyToOne(type => Batch, batch => batch.students)
   batch: Batch;

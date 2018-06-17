@@ -1,6 +1,7 @@
 import * as request from 'superagent'
 import {baseUrl} from '../constants'
 
+export const CREATE_CLASS = "CREATE_CLASS"
 export const GIVE_BATCHES = 'GIVE_BATCHES'
 export const GIVE_BATCH = 'GIVE_BATCH'
 export const SET_CURRENT_BATCH = 'SET_CURRENT_BATCH'
@@ -16,6 +17,7 @@ export const giveBatches = () => dispatch => {
             payload: response.body
         })
     })
+
     .catch(err => console.error(err))
 }
 
@@ -35,8 +37,15 @@ export const createBatch = (batch) => (dispatch) => {
     request
       .post(`${baseUrl}/classes`)
       .send(batch)
+      .then(response => {
+          dispatch({
+              type: CREATE_CLASS,
+              payload: response.body
+          })
+      })
       .catch(err => console.error(err))
   }
+
 
 export const setCurrentBatch = (batch) => {
     return {
@@ -44,3 +53,9 @@ export const setCurrentBatch = (batch) => {
         payload: batch
     }
   }
+
+export const askRandom = (batchID) => {
+    request 
+    .get(`${baseUrl}/class/askRandom/${batchID}`)
+
+}

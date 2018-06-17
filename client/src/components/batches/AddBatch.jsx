@@ -1,13 +1,8 @@
 import React, {PureComponent} from 'react'
-import {getUsers} from '../../actions/users'
-import {giveBatches, createBatch} from '../../actions/batches'
+import { createBatch} from '../../actions/batches'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import Typography from 'material-ui/Typography'
-import InfoCard from '../layout/InfoCard'
+import {Link, Redirect} from 'react-router-dom'
+
 
 class AddBatch extends PureComponent {
     constructor(props) {
@@ -20,11 +15,13 @@ class AddBatch extends PureComponent {
     }
 
     handleCreateBatch(e) {
+        e.preventDefault()
         this.props.createBatch({
             batchNumber: this.state.batchNumber,
             startDate: this.state.startDate, 
             endDate: this.state.endDate
         })
+    this.setState({ redirect: true })
     }
 
     handleChange(e) {
@@ -44,7 +41,7 @@ class AddBatch extends PureComponent {
 
             default:
                 break;
-        }
+        } 
     }
 
     handleNumberChange(e) {
@@ -58,6 +55,7 @@ class AddBatch extends PureComponent {
 
     return (  
         <div> 
+            {this.state.redirect && <Redirect to="/classes" />}
             <div>
                 <h1>Create a New Batch</h1>
             </div>

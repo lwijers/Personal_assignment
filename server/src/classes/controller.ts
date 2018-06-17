@@ -8,11 +8,13 @@ export default class ClassesController {
 
     @Post('/classes')
 @HttpCode(201)
-createbatches(
+async createbatches(
   @Body() batch : Batch
 ) {
-  return batch.save()
+  return await batch.save()
 }
+
+
 
 @Put('/classes/:id')
 async updatePage(
@@ -47,6 +49,15 @@ async updatePage(
     return Student.find({where :{batch: batchID}})
   }
 
+  @Get('/class/askRandom/:batchID([0-9]+)')
+  async askRandom(
+    @Param('batchID') batchID: number
+  ) {
+      const students = await Student.find({where :{batch: batchID}})
+      
+      students.map((student) => {
+
+    })
+  }
 
 }
-

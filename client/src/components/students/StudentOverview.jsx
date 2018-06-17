@@ -1,20 +1,23 @@
 import React, {PureComponent} from 'react'
-
-import {getUsers} from '../../actions/users'
 import {giveStudents} from '../../actions/students'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import Typography from 'material-ui/Typography'
-import InfoCard from '../layout/InfoCard'
+
 import StudentCard from './StudentCard'
 
 class StudentOverview extends PureComponent {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       scoreTally = {}       
+//     };
+// }
 
-  componentWillMount() {
-    this.props.giveStudents(this.props.currentBatch.id)
+  componentDidMount() { 
+    if (this.props.students === null) {
+      this.props.giveStudents(this.props.currentBatch.id)
+    }
+    // this.calculateScores()  
   }
 
   handleAddStudent(e) {
@@ -28,6 +31,17 @@ class StudentOverview extends PureComponent {
       toBatches: true
     }))
   }
+
+  handleGiveRandom(e){
+    // askRandom()
+  }
+
+  // calculateScores() {
+  //   console.log('students in overview', this.props.students)
+  //   students.map((student) => {
+  //     student.evaluations
+  //   })
+  // }
 
   render() {
 
@@ -58,7 +72,9 @@ class StudentOverview extends PureComponent {
           <Link to={`/classes`} style={{textDecoration: 'none'}}>
             <button onClick={this.handleBack.bind(this)} >back</button>
           </Link>
+          
         </div>
+        <button onClick={this.handleGiveRandom.bind(this)} >random question</button>
       </div>
       
     )

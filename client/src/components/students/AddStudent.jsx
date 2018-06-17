@@ -1,20 +1,12 @@
 import React, {PureComponent} from 'react'
-import {getUsers} from '../../actions/users'
-import {giveBatches} from '../../actions/batches'
 import {addStudent} from '../../actions/students'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
-import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import Typography from 'material-ui/Typography'
-import InfoCard from '../layout/InfoCard'
+import {Redirect, Link} from 'react-router-dom'
 
 class AddStudent extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-        toBatch: false,
         firstName: "",
         lastName: "",
         pictureURL: "",
@@ -28,19 +20,13 @@ class AddStudent extends PureComponent {
             pictureURL: this.state.pictureURL,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
-            batch: this.props.batch
+            batch: this.props.batch,
+            totalScore: 0,
+            colorCode:  ""
         })
-
-        this.setState(() => ({
-        toBatch: true
-        }))
+        this.setState({ redirect: true })
     }
 
-    handleExit(e) {
-        this.setState(() => ({
-        toBatch: true
-        }))
-    }
 
     handlefirstName(e) {
         let i = e.target.value
@@ -65,8 +51,8 @@ class AddStudent extends PureComponent {
  
   render() {
 
-    if (this.state.toBatch === true) {
-        return <Redirect to='/StudentOverview' />
+    if (this.state.redirect === true) {
+        return <Redirect to='/class' />
     }
 
     return (  
@@ -103,8 +89,10 @@ class AddStudent extends PureComponent {
                 </form>
             </div>
             <button onClick={this.handleSaveExit.bind(this)}>save and exit</button>
-
-            <button onClick={this.handleExit.bind(this)}>exit</button>
+            
+            <Link to={`/class`} style={{textDecoration: 'none'}}>
+                <button>exit</button>
+            </Link>
         </div>
         
     )

@@ -1,10 +1,9 @@
 import React, {PureComponent} from 'react'
-import {getUsers} from '../../actions/users'
-import {giveBatches} from '../../actions/batches'
 import {addEvaluation} from '../../actions/evaluations'
+import {updateTotScore} from '../../actions/students'
+// import {setTotalScore} from '../../actions/students'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import Button from 'material-ui/Button'
 import './evaluationForm.css'
 
 
@@ -18,6 +17,7 @@ class AddEvaluation extends PureComponent {
       selectedBox: "",
       score: 0,
       remark: "",
+      totalEvaluation: 0,
       scoreBoxes: {
         red: true,
         yellow: false,
@@ -25,6 +25,17 @@ class AddEvaluation extends PureComponent {
       },
     }
   }
+
+  calculateTotalEvaluation() {
+    const allEvals = this.props.studentEvaluations
+    let totalScore = 0
+
+    for (var evaluation in allEvals) {
+      totalScore +=  allEvals[evaluation].score 
+    }
+     return totalScore
+  }
+
 
 
   handleScoreBox(e)  {
@@ -49,12 +60,24 @@ class AddEvaluation extends PureComponent {
   }
   
   handleSaveExit(e) {
+    let studScore = this.scoreCalculator() + this.props.studentTotalScore
+
+    let maxScore = (this.props.studentEvaluations.length +1) * 3
+
+    let avg = studScore / maxScore
+    let avgRound = avg.toFixed(2)
+
+    let colorCode = ""
+
+    avgRound <= 0.33 ? colorCode = 'red' : avgRound <= 0.66 ? colorCode = 'yellow' : colorCode = 'green'
+
+
     this.props.addEvaluation({
       date: this.state.currentDate,
       score: this.scoreCalculator(),
       remark: this.state.remark,
-      student: this.props.student
-    })
+      student: this.props.student,
+    }, studScore) 
   }
 
   scoreCalculator(){
@@ -132,8 +155,12 @@ class AddEvaluation extends PureComponent {
   }
 } 
 
-const mapStateToProps = ({currentStudent}) => {
-  return {student: currentStudent}
+const mapStateToProps = ({currentStudent, studentEvaluations, studentTotalScore}) => {
+  return {
+    student: currentStudent,
+    studentEvaluations,
+    studentTotalScore
+  }
 }
 
 export default connect(mapStateToProps, {addEvaluation})(AddEvaluation)

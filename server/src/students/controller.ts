@@ -22,6 +22,30 @@ async updatePage(
 
   return Student.merge(student, update).save()
 }
+  @Get('/students')
+  async allStudents() {
+    const students = await Student.find()
+    return { students }
+  }
+
+  @Get('/class/:batchID([0-9]+)')
+  getStudentsByBatch(
+    @Param('batchID') batchID: number
+  ) {
+    return Student.find({where :{batch: batchID}})
+  }
+}
+
+  
+
+// @Delete('/students/:id([0-9]+)')
+// async deleteStudent(
+//   @Param('id') id: number
+//   ) {
+//     return Student.delete(id)
+//   }
+
+
 
 // @Get('/students/:id([0-9]+)')
 //   getStudents(
@@ -30,23 +54,4 @@ async updatePage(
 //     return Student.findOneById(id)
 //   }
 
-  @Get('/students')
-  async allStudents() {
-    const students = await Student.find()
-    return { students }
-  }
 
-  // @Get('/class/:batchID([0-9]+)')
-  // getStudentsByBatch(
-  //   @Param('batchID') batchID: number
-  // ) {
-  //   return Student.find({where :{batch: batchID}})
-  // }
-
-// @Delete('/students/:id([0-9]+)')
-// async deleteStudent(
-//   @Param('id') id: number
-//   ) {
-//     return Student.delete(id)
-//   }
-}

@@ -1,12 +1,8 @@
 import React, {PureComponent} from 'react'
-import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import Typography from 'material-ui/Typography'
-import {giveSingleStudent} from '../../actions/students'
+
+import {giveSingleStudent, setStudentTotalScore} from '../../actions/students'
 import {giveEvalByStud} from '../../actions/evaluations'
 
 import './styling/student.css'
@@ -22,7 +18,17 @@ class DisplayStudent extends PureComponent {
   
   }
 
+  handleAddEvaluation(e) {
+    this.props.setStudentTotalScore(this.calculateScore())
+  }
 
+  calculateScore() {
+    let i = 0
+    this.props.studentEvaluations.map((evaluation) => {
+      i += evaluation.score
+    })
+    return i
+  }
 
   renderScore(score, date){
     const month =  date.slice(8,10)
@@ -75,7 +81,7 @@ class DisplayStudent extends PureComponent {
         </div>
         <div>
           <Link to={`/evaluation/createNew`} style={{textDecoration: 'none'}}>
-            <button>Add Evaluation</button>
+            <button onClick={this.handleAddEvaluation.bind(this)}>Add Evaluation</button>
           </Link>
           <Link to={`/classes`} style={{textDecoration: 'none'}}>
             <button>Edit Student</button>
@@ -97,4 +103,4 @@ const mapStateToProps = ({currentStudent, studentEvaluations}) => {
   return {currentStudent, studentEvaluations}
 }
 
-export default connect(mapStateToProps,{giveSingleStudent, giveEvalByStud})(DisplayStudent)
+export default connect(mapStateToProps,{giveSingleStudent, giveEvalByStud, setStudentTotalScore})(DisplayStudent)
