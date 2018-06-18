@@ -6,7 +6,7 @@ export const GIVE__ONE_STUDENT = 'GIVE__ONE_STUDENT'
 export const SET_CURRENT_STUDENT = 'SET_CURRENT_STUDENT'
 export const CREATE_STUDENT = 'CREATE_STUDENT'
 export const SET_TOTAL_SCORE = 'SET_TOTAL_SCORE'
-
+export const GET_RANDOM_STUDENT = 'GET_RANDOM_STUDENT'
 
 export const giveStudents = (id) => dispatch => {
     request
@@ -45,19 +45,34 @@ export const addStudent = (student) => (dispatch) => {
       .catch(err => console.error(err))
   }
 
-  export const setCurrentStudent = (student) => {
+export const setCurrentStudent = (student) => {
     return {
         type: SET_CURRENT_STUDENT,
         payload: student
     }
-  }
+}
 
-  export const setStudentTotalScore = (score) => {
+export const setStudentTotalScore = (score) => {
     return {
         type: SET_TOTAL_SCORE,
         payload: score
     }
-  }
+}
+
+export const getRandomStudent = (color) => (dispatch)=> {
+    request
+    .get(`${baseUrl}/students/getRandom/${color}`)
+    .then( 
+        response =>
+        dispatch ({
+            type: GET_RANDOM_STUDENT,
+            payload: response.body
+        })
+    )
+    .catch(err => console.error(err))
+}
+    
+
 
 
 //   export const updateTotScore = (id, score) => {

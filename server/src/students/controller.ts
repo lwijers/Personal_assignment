@@ -34,6 +34,18 @@ async updatePage(
   ) {
     return Student.find({where :{batch: batchID}})
   }
+  
+  @Get('/students/getRandom/:color')
+  async getrandomStudentByColor( 
+    @Param('color') color: string ) {
+      const students = await Student.find({where :{colorCode: color}})
+      console.log(students, color)
+      var randStud = students[Math.floor(Math.random() * students.length)];
+      console.log(randStud)
+      return randStud
+      
+    }
+
 }
 
   

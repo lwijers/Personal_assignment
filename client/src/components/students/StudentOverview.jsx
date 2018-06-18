@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import {giveStudents} from '../../actions/students'
+import {giveStudents, getRandomStudent} from '../../actions/students'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
@@ -32,16 +32,14 @@ class StudentOverview extends PureComponent {
     }))
   }
 
-  handleGiveRandom(e){
-    // askRandom()
+  handleAskRandom(e){
+    let randomNumber = Math.random().toFixed(2)
+    console.log(randomNumber)
+    randomNumber <= 0.45 ?  this.props.getRandomStudent('red') 
+    : randomNumber <= 0.80 ?  this.props.getRandomStudent('yellow') 
+    : this.props.getRandomStudent('green') 
+    window.alert('student to ask question:' + this.props.currentStudent.firstName + this.props.currentStudent.id)
   }
-
-  // calculateScores() {
-  //   console.log('students in overview', this.props.students)
-  //   students.map((student) => {
-  //     student.evaluations
-  //   })
-  // }
 
   render() {
 
@@ -74,7 +72,7 @@ class StudentOverview extends PureComponent {
           </Link>
           
         </div>
-        <button onClick={this.handleGiveRandom.bind(this)} >random question</button>
+        <button onClick={this.handleAskRandom.bind(this)} >random question</button>
       </div>
       
     )
@@ -82,9 +80,9 @@ class StudentOverview extends PureComponent {
 } 
 
 
-const mapStateToProps = ({students, currentBatch}) => {
-  return {students, currentBatch}
+const mapStateToProps = ({students, currentBatch, currentStudent}) => {
+  return {students, currentBatch, currentStudent}
 }
 
 
-export default connect(mapStateToProps, {giveStudents})(StudentOverview)
+export default connect(mapStateToProps, {giveStudents, getRandomStudent})(StudentOverview)

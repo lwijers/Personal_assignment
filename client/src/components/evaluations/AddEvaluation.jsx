@@ -5,6 +5,7 @@ import {updateTotScore} from '../../actions/students'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import './evaluationForm.css'
+import color from 'material-ui/colors/teal';
 
 
 class AddEvaluation extends PureComponent {
@@ -66,18 +67,18 @@ class AddEvaluation extends PureComponent {
 
     let avg = studScore / maxScore
     let avgRound = avg.toFixed(2)
-
+    console.log(avgRound)
     let colorCode = ""
 
-    avgRound <= 0.33 ? colorCode = 'red' : avgRound <= 0.66 ? colorCode = 'yellow' : colorCode = 'green'
-
+    avgRound <= 0.33 ? colorCode = 'red' : avgRound <= 0.67 ? colorCode = 'yellow' : colorCode = 'green'
+    console.log(colorCode)
 
     this.props.addEvaluation({
       date: this.state.currentDate,
       score: this.scoreCalculator(),
       remark: this.state.remark,
       student: this.props.student,
-    }, studScore) 
+    }, studScore, colorCode) 
   }
 
   scoreCalculator(){
