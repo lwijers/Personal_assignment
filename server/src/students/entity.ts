@@ -32,29 +32,13 @@ export default class Student extends BaseEntity {
 
 
 
-  @ManyToOne(type => Batch, batch => batch.students)
+  @ManyToOne(_ => Batch, batch => batch.students, { onDelete: 'CASCADE' })
   batch: Batch;
 
-  @OneToMany(type => Evaluation, evaluation => evaluation.student)
+  @OneToMany(type => Evaluation, evaluation => evaluation.student, {eager:true})
   evaluations: Evaluation[];
 
-  // http POST  :4000/students pictureURL="https://d3iw72m71ie81c.cloudfront.net/male-57.jpg" firstName="Test2 " lastName="test2" email="test2@test2.test"
-// 
-
-  // @IsString()
-  // @MinLength(8)
-  // @Column('text')
-  // @Exclude({ toPlainOnly: true })
-  // password: string
-
-  
-  // this is a relation, read more about them here:
-  // http://typeorm.io/#/many-to-one-one-to-many-relations
-//   @OneToMany(_ => Player, player => player.user) 
-//   players: Player[]
 }
-
-
 // [
 //   {
 //       "name": "Justine Bateman",

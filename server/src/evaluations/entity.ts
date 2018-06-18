@@ -21,25 +21,7 @@ export default class Evaluation extends BaseEntity {
   @Column('text')
   remark: string
   
-  @ManyToOne(type => Student, student => student.evaluations)
+  @ManyToOne(type => Student, student => student.evaluations, { onDelete: 'CASCADE'})
   student: Student;
 
 }
-
-
-
-  // @IsString()
-  // @MinLength(8)
-  // @Column('text')
-  // @Exclude({ toPlainOnly: true })
-  // password: string
-
-  
-  // this is a relation, read more about them here:
-  // http://typeorm.io/#/many-to-one-one-to-many-relations
-//   @OneToMany(_ => Player, player => player.user) 
-//   players: Player[]
-
-
-
-// studentId=1 color='red' remark='blablabla'

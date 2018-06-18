@@ -1,4 +1,4 @@
-import { JsonController, Post, Put, Param, Get, Body, HttpCode, NotFoundError } from 'routing-controllers'
+import { JsonController, Post, Put, Param, Get, Body, HttpCode, NotFoundError, Delete } from 'routing-controllers'
 import Student from './entity';
 
 @JsonController()
@@ -46,16 +46,22 @@ async updatePage(
       
     }
 
+    @Delete('/student/deleteStudent/:id([0-9]+)')
+    async deleteStudent(
+      @Param('id') id: number
+      ) {
+        const stud = await Student.findOne(id)
+        console.log(stud)
+        if (!stud) throw new NotFoundError("Student doesn't exist")
+        
+        await Student.remove(stud)
+      }
+    
+    
+
 }
 
   
-
-// @Delete('/students/:id([0-9]+)')
-// async deleteStudent(
-//   @Param('id') id: number
-//   ) {
-//     return Student.delete(id)
-//   }
 
 
 

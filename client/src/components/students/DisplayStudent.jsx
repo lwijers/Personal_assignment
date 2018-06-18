@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-import {giveSingleStudent, setStudentTotalScore} from '../../actions/students'
+import {giveSingleStudent, setStudentTotalScore, deleteStudent} from '../../actions/students'
 import {giveEvalByStud} from '../../actions/evaluations'
 
 import './styling/student.css'
@@ -15,7 +15,10 @@ class DisplayStudent extends PureComponent {
   }
 
   handleDeleteStudent(e) {
-  
+    this.props.deleteStudent(this.props.currentStudent.id)
+    this.setState({
+      redirect: true
+    })
   }
 
   handleAddEvaluation(e) {
@@ -87,7 +90,7 @@ class DisplayStudent extends PureComponent {
             <button>Edit Student</button>
           </Link>
           <Link to={`/classes`} style={{textDecoration: 'none'}}>
-            <button>Delete Student</button>
+            <button onClick={this.handleDeleteStudent.bind(this)}>Delete Student</button>
           </Link>
         </div>
         <Link to={`/class`} style={{textDecoration: 'none'}}>
@@ -103,4 +106,4 @@ const mapStateToProps = ({currentStudent, studentEvaluations}) => {
   return {currentStudent, studentEvaluations}
 }
 
-export default connect(mapStateToProps,{giveSingleStudent, giveEvalByStud, setStudentTotalScore})(DisplayStudent)
+export default connect(mapStateToProps,{deleteStudent, giveSingleStudent, giveEvalByStud, setStudentTotalScore})(DisplayStudent)

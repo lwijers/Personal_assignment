@@ -7,6 +7,7 @@ export const SET_CURRENT_STUDENT = 'SET_CURRENT_STUDENT'
 export const CREATE_STUDENT = 'CREATE_STUDENT'
 export const SET_TOTAL_SCORE = 'SET_TOTAL_SCORE'
 export const GET_RANDOM_STUDENT = 'GET_RANDOM_STUDENT'
+export const DELETE_STUDENT = 'DELETE_STUDENT'
 
 export const giveStudents = (id) => dispatch => {
     request
@@ -68,10 +69,21 @@ export const getRandomStudent = (color) => (dispatch)=> {
             type: GET_RANDOM_STUDENT,
             payload: response.body
         })
+        
     )
     .catch(err => console.error(err))
 }
-    
+
+export const deleteStudent = (id) => (dispatch) => {
+    console.log(id)
+    request
+    .delete(`${baseUrl}/student/deleteStudent/${id}`)
+    .then(response => dispatch({
+      type: DELETE_STUDENT,
+      payload: id
+    }))
+    .catch(err => console.error(err))
+  }
 
 
 
